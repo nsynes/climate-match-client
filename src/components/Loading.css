@@ -1,0 +1,34 @@
+.loading {
+  display: inline-block;
+  position: absolute;
+  border-width: 10px;
+  border-style: solid;
+  border-right-color: rgba(128, 128, 128, 0.25);
+  border-radius: 50%;
+  animation: rotate 1s infinite ease-in-out, color-transition 1s infinite ease-in-out;
+  z-index: 1000;
+  top: 20%;
+  left: calc(50% - 24px);
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes color-transition {
+  0% {
+    border-color: rgba(1,74,42,.75);
+    border-right-color: rgba(128,128,128,.25);
+  }
+  50% {
+    border-color: rgb(99,167,10,.5);
+    border-right-color: rgba(128,128,128,.25);
+  }
+  100% {
+    border-color: rgb(1,74,42,.75);
+    border-right-color: rgba(128,128,128,.25);
+  }
+}

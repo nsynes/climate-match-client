@@ -8,7 +8,7 @@ const SummaryText = (props) => {
     var [searchClimateStartDate, searchClimateEndDate] = searchClimate.split('-');
 
     return (
-        <div style={{padding: '1em 0'}}>
+        <div>
             {`
              ${searchClimateEndDate < 2020 ? `Areas that currently (${searchClimate}) have` : 'Areas that will have'}
              ${cdVar === 'full' ? 'a similar' : 'similar'}

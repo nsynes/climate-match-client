@@ -15,7 +15,6 @@ const ResultsSummary = (props) => {
         return (
             <div className='results-summary'>
                 <b>Summary</b>
-                <br/>
                 <div className='summary-text'>
                     <SummaryText
                         resultParams={props.resultParams} />                
@@ -23,6 +22,11 @@ const ResultsSummary = (props) => {
                 </div>
                 <table>
                     <tbody>
+                        <tr>
+                            <th colspan='2' style={{backgroundColor: 'rgb(200,200,200)'}}>
+                                Parameters
+                            </th>
+                        </tr>
                         <tr>
                             <th>Climate difference variables</th>
                             <td>{cdVarName}</td>

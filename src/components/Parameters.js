@@ -5,8 +5,6 @@ import './Parameters.css';
 
 const Parameters = (props) => {
 
-    console.log('parameters', props)
-
     if ( props.mode === 'advanced' ) {
         return (
             <ParametersAdvanced />

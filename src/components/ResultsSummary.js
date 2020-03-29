@@ -1,5 +1,6 @@
 import React from 'react';
 import Legend from './Legend';
+import SummaryText from './SummaryText';
 import { listMonths, cdVarNames } from '../config';
 import './ResultsSummary.css';
 
@@ -7,13 +8,19 @@ const ResultsSummary = (props) => {
 
     if ( props.resultParams && props.resultParams.searchClimate ) {
         const { selectedPoint, localClimate, searchClimate, months, cdVar } = props.resultParams;
-        const lat = selectedPoint.lat;
-        const lng = selectedPoint.lng;
+        const { lat, lng } = selectedPoint;
         const monthsText = months.map((m) => listMonths[m-1]).join(', ');
         const cdVarName = cdVarNames.find((varObj) => varObj[cdVar])[cdVar];
 
         return (
             <div className='results-summary'>
+                <b>Summary</b>
+                <br/>
+                <div className='summary-text'>
+                    <SummaryText
+                        resultParams={props.resultParams} />                
+                    <Legend nSites={props.resultParams.nSites} />
+                </div>
                 <table>
                     <tbody>
                         <tr>
@@ -38,7 +45,6 @@ const ResultsSummary = (props) => {
                         </tr>
                     </tbody>
                 </table>
-                <Legend nSites={props.resultParams.nSites} />
             </div>
         );
     } else {

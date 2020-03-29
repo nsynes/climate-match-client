@@ -17,8 +17,8 @@ class App extends React.Component {
             mode: 'basic',
             params: {
                 selectedPoint: null,
-                localClimate: '',
-                searchClimate: '',
+                localClimate: '1981-2010',
+                searchClimate: '2050-2079',
                 months: [true,true,true,true,true,true,true,true,true,true,true,true],
                 cdVar: 'full',
                 nSites: 5000
@@ -28,7 +28,6 @@ class App extends React.Component {
     }
 
     handleModeChange = (e) => {
-        console.log('handleModeChange',e)
         this.setState({
             mode: e.target.value
         })

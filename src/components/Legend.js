@@ -12,9 +12,10 @@ const Legend = (props) => {
                     <div className='legend-colors' />
                     <div style={{height: '0.25em'}} />
                 </div>
-                <div className='legend-text'>
-                    <div className='legend-text-top'>Closest match</div>
-                    <div className='legend-text-bottom'>{props.nSites}<sup>th</sup> match</div>
+                <div className='legend-text-container'>
+                    <div className='legend-text'>Closest match</div>
+                    <div class='legend-text-spacer'></div>
+                    <div className='legend-text'>{props.nSites}<sup>th</sup> match</div>
                 </div>
             </div>
         </div>

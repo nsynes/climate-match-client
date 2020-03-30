@@ -9,7 +9,7 @@
     max-width: 200px;
 }
 .checkbox-inline {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
 }
 .checkbox-label {

@@ -12,7 +12,7 @@ const Dropdown = (props) => {
     }
 
     return (
-        <div style={{padding: '0 1em'}}>
+        <div style={{padding: '0 1em 1em 1em'}}>
             <label>
                 {name}
             </label>

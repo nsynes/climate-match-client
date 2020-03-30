@@ -16,6 +16,7 @@ const Inputs = (props) => {
                 mode={props.mode}
                 localClimate={props.params.localClimate}
                 searchClimate={props.params.searchClimate}
+                monthsType={props.params.monthsType}
                 months={props.params.months}
                 cdVar={props.params.cdVar}
                 handleDropdownChange={props.handleDropdownChange}

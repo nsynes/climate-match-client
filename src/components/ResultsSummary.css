@@ -32,6 +32,7 @@ tbody tr:last-child td:last-child {
     right: 8px;
     top: 8px;
     width: 33%;
+    min-width:300px;
     padding: 5px;
     border: 1px solid rgb(100,100,100);
     box-shadow: 3px 3px 3px rgba(0,0,0,0.5);

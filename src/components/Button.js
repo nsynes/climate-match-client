@@ -4,7 +4,8 @@ import './Button.css';
 const Button = (props) => {
 
     return (
-        <div className='button-container'>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
+            <div style={{flexGrow: 1}}></div>
             <button className='submit-button'>Calculate</button>
         </div>
     );

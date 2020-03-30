@@ -13,6 +13,7 @@ const Parameters = (props) => {
             <ParametersBasic
                 localClimate={props.localClimate}
                 searchClimate={props.searchClimate}
+                monthsType={props.monthsType}
                 months={props.months}
                 cdVar={props.cdVar}
                 handleDropdownChange={props.handleDropdownChange}

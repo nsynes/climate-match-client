@@ -14,7 +14,7 @@ h1 {
 }
 @media all and (max-width: 800px) {
     .inputs-container {
-        width: 100%;
+        width: calc(100%-2px);
         margin: 1px;
     }
 }

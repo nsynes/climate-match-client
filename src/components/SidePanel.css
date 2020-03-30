@@ -1,0 +1,51 @@
+.side-panel {
+    position: absolute;
+    overflow-y: auto;
+    height: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: white;
+    z-index: 3;
+    -webkit-transition: opacity 0.2s;
+    transition: opacity 0.2s;
+}
+.side-panel.visible {
+    left: 0px;
+    box-shadow: 5px 0px 5px rgba(0,0,0,0.1);
+}
+.side-panel-toggle {
+    position: absolute;
+    top: 0.25em;
+    left: 0.25em;
+    z-index: 3;
+    opacity: 0.8;
+    background-color: white;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    transition: opacity 0.2s;
+    -webkit-transition: opacity 0.2s;
+    cursor: pointer;
+}
+.side-panel-toggle:hover {
+    opacity: 1;
+}
+@media all and (min-width: 801px) {
+    .side-panel {
+        width: 500px;
+    }
+    .side-panel.hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+@media all and (max-width: 800px) {
+    .side-panel {
+        width: 85%;
+    }
+    .side-panel.hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+}

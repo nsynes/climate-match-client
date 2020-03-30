@@ -1,5 +1,6 @@
 import React from 'react';
 import Map from './Map';
+import SidePanel from './SidePanel';
 import ResultsSummary from './ResultsSummary';
 import './Outputs.css';
 
@@ -7,6 +8,7 @@ const Outputs = (props) => {
 
     return (
         <div className='output-container'>
+            <SidePanel />
             <ResultsSummary
                 resultParams={props.resultParams} />
             <Map 

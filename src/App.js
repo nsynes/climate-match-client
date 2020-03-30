@@ -135,8 +135,6 @@ class App extends React.Component {
     render() {
         return (
             <div>
-
-
                 { this.state.loading && <Loading
                     width='48px'
                     height='48px'/> }
@@ -153,9 +151,6 @@ class App extends React.Component {
                     handleDropdownChange={this.handleDropdownChange}
                     handleCheckboxChange={this.handleCheckboxChange}
                     handleSubmit={this.handleSubmit} />
-
-                
-                
           </div>
         );
     }

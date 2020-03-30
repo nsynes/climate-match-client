@@ -1,0 +1,14 @@
+.help-container {
+    float: left;
+    padding: 0 1em 1em 1em;
+    height: 100%;
+}
+.help-header {
+    overflow: hidden;
+}
+h2 {
+    margin: 0.4em 0 1em 1.5em;
+}
+.help-content {
+    overflow-y: auto;
+}

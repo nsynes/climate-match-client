@@ -92,7 +92,7 @@ class Map extends React.Component {
             <div>
                 <LeafletMap
                     className={ !this.props.loading && this.props.climateGeojson === '' ? 'leaflet-map' : ''}
-                    style={{height: 600}}
+                    style={{height: 1000}}
                     center={[50, 10]}
                     zoom={4}
                     maxZoom={19}

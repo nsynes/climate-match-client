@@ -3,9 +3,18 @@ h1 {
 }
 .inputs-container {
     position: relative;
-    width: 80%;
-    margin: auto;
-    margin-top: .5em;
     border: 1px solid rgb(230, 230, 230);
     border-radius: 5px;
+}
+@media all and (min-width: 801px) {
+    .inputs-container {
+        width: 80%;
+        margin: .5em auto;
+    }
+}
+@media all and (max-width: 800px) {
+    .inputs-container {
+        width: 100%;
+        margin: 1px;
+    }
 }

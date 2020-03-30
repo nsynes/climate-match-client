@@ -1,0 +1,17 @@
+.checkbox-param {
+    padding: 0 1em;
+}
+.checkbox-container {
+    column-count: 3;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    max-width: 200px;
+}
+.checkbox-inline {
+    display: flex;
+    flex-direction: row;
+}
+.checkbox-label {
+    padding-left: 0.5em;
+}

@@ -21,12 +21,14 @@ const ResultsSummary = (props) => {
                     <Legend nSites={props.resultParams.nSites} />
                 </div>
                 <table>
-                    <tbody>
+                    <thead>
                         <tr>
-                            <th colspan='2' style={{backgroundColor: 'rgb(200,200,200)'}}>
+                            <th colSpan='2'>
                                 Parameters
                             </th>
                         </tr>
+                    </thead>
+                    <tbody>
                         <tr>
                             <th>Climate difference variables</th>
                             <td>{cdVarName}</td>

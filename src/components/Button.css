@@ -1,0 +1,29 @@
+.button-container {
+    position: relative;
+    min-width: 8em;
+    margin-left: 2em;
+}
+.submit-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    outline: none;
+    padding: 1em;
+    margin: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    background-color: grey;
+    max-width: 100px;
+    transition-duration: 0.25s;
+    box-shadow: 1px 3px black;
+}
+.submit-button:hover {
+    background-color: #026937;
+}
+.submit-button:active {
+    background-color: #014A2A;
+    box-shadow: 1px 1px black;
+    transform: translateY(2px);
+}

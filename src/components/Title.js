@@ -6,19 +6,13 @@ const Title = (props) => {
 
     return (
         <div className='title-container'>
-            <h1>Climate Matching Tool</h1>
-            <ForestResearchLogo />     
+            <ForestResearchLogo />
+            <div style={{width:'2em'}}></div>
+            <div style={{position: 'relative'}}>
+                <h1>Climate Matching Tool</h1>
+            </div>
         </div>
     );
 }
 
 export default Title;
-
-
-
-
-
-
-
-
-            

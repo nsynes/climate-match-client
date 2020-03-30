@@ -1,11 +1,13 @@
 input, label, select {
     display:block;
 }
-.form-inline {
+.form-container {
     display: flex;
+    justify-content: center;
+}
+.form-inline {
+    display: inline-flex;
     flex-flow: row wrap;
-    margin: auto;
-    width: 100%;
 }
 .form-inline label {
     margin: 5px 10px 5px 0;
@@ -17,32 +19,7 @@ input, label, select {
     background-color: #fff;
     border: 1px solid #ddd;
 }
-.submit-button {
-    outline: none;
-    padding: 1em;
-    margin: 1em;
-    height: 3em;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-weight: bold;
-    color: white;
-    background-color: grey;
-    max-width: 100px;
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
-    transition-duration: 0.25s;
-    box-shadow: 1px 3px black;
-}
-.submit-button:hover {
-    background-color: #026937;
-}
-.submit-button:active {
-    background-color: #014A2A;
-    box-shadow: 1px 1px black;
-    transform: translateY(2px);
-  }
-@media (max-width: 800px) {
+@media all and (max-width: 800px) {
     .form-inline input {
       margin: 10px 0;
     }
@@ -54,16 +31,4 @@ input, label, select {
       flex-direction: column;
       align-items: stretch;
     }
-}
-.checkbox-inline {
-    display: flex;
-    max-width: 50px;
-}
-
-.checkbox-container {
-    columns: 10px 3;
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-    max-width: 200px;
 }

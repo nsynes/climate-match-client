@@ -1,7 +1,6 @@
 import React from 'react';
 import ParametersBasic from './ParametersBasic';
 import ParametersAdvanced from './ParametersAdvanced';
-import './Parameters.css';
 
 const Parameters = (props) => {
 

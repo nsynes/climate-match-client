@@ -4,11 +4,11 @@ const SummaryText = (props) => {
 
     const { localClimate, searchClimate, cdVar, selectedPoint } = props.resultParams;
     const { lat, lng } = selectedPoint;
-    var [localClimateStartDate, localClimateEndDate] = localClimate.split('-');
-    var [searchClimateStartDate, searchClimateEndDate] = searchClimate.split('-');
+    var localClimateEndDate = localClimate.split('-')[1];
+    var searchClimateEndDate = searchClimate.split('-')[1];
 
     return (
-        <div>
+        <div style={{marginRight: '0.25em'}}>
             {`
              ${searchClimateEndDate < 2020 ? `Areas that currently (${searchClimate}) have` : 'Areas that will have'}
              ${cdVar === 'full' ? 'a similar' : 'similar'}

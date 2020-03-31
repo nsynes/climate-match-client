@@ -70,7 +70,11 @@ class App extends React.Component {
         });
     }
 
-    handleSubmit = (e) => {
+    handleRefresh = () => {
+        window.location.reload();
+    }
+
+    handleCalculate = (e) => {
         e.preventDefault();
 
         const { params } = this.state;
@@ -160,7 +164,8 @@ class App extends React.Component {
                     handleModeChange={this.handleModeChange}
                     handleDropdownChange={this.handleDropdownChange}
                     handleCheckboxChange={this.handleCheckboxChange}
-                    handleSubmit={this.handleSubmit} />
+                    handleCalculate={this.handleCalculate}
+                    handleRefresh={this.handleRefresh} />
           </div>
         );
     }

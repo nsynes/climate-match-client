@@ -2,6 +2,8 @@ import React from 'react';
 
 const Dropdown = (props) => {
 
+    console.log('Dropdown change', props.name)
+
     const { initialValue, listOptions, name, varName } = props;
 
     var options = [];

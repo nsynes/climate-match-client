@@ -14,8 +14,8 @@
 .legend-colors {
     width: 20px;
     height: 50px;
-    background-image: linear-gradient(red, yellow);
-    /*background-image: linear-gradient(rgb(0,40,0), rgb(0,255,100))*/;
+    /*background-image: linear-gradient(red, yellow);*/
+    background-image: linear-gradient(rgb(0,40,0), rgb(0,255,100));
     /*background-image: linear-gradient(rgb(25,25,25), rgb(175,175,175));*/
 }
 .legend-text-container {

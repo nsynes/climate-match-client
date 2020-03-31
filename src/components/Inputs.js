@@ -21,7 +21,8 @@ const Inputs = (props) => {
                 cdVar={props.params.cdVar}
                 handleDropdownChange={props.handleDropdownChange}
                 handleCheckboxChange={props.handleCheckboxChange}
-                handleSubmit={props.handleSubmit} />
+                handleCalculate={props.handleCalculate}
+                handleRefresh={props.handleRefresh} />
         </div>
     );
 }

@@ -1,0 +1,16 @@
+.result-toggle {
+    position: absolute;
+    top: 0.3em;
+    right: 0.3em;
+    height: 20px;
+    z-index: 4;
+    background-color: white;
+    border: 1px solid rgb(200,200,200);
+    border-radius: 5px;
+    transition: background-color 0.2s;
+    -webkit-transition: background-color 0.2s;
+    cursor: pointer;
+}
+.result-toggle:hover {
+    background-color: rgb(230,230,230);
+}

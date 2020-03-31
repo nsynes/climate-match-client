@@ -1,7 +1,7 @@
 import React from 'react';
 import Map from './Map';
 import SidePanel from './SidePanel';
-import ResultsSummary from './ResultsSummary';
+import ResultSummary from './ResultSummary';
 import './Outputs.css';
 
 const Outputs = (props) => {
@@ -9,7 +9,7 @@ const Outputs = (props) => {
     return (
         <div className='output-container'>
             <SidePanel />
-            <ResultsSummary
+            <ResultSummary
                 resultParams={props.resultParams} />
             <Map 
                 selectedPoint={props.selectedPoint}

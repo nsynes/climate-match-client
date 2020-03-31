@@ -9,7 +9,6 @@ const ParametersBasic = (props) => {
 
     const years = baselineYears.concat(futureYears);
 
-    console.log('ParametersBasic', props)
     const { localClimate, searchClimate, cdVar, monthsType, months } = props;
 
     return (

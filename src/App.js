@@ -140,8 +140,14 @@ class App extends React.Component {
                 })
             }
         })
-        .catch((error, d) => {
-            console.log('error',error, d)
+        .catch((error) => {
+            this.setState({
+                resultParams: {},
+                climateGeojson: '',
+                cellHalfWidth: null,
+                loading: false,
+                warningMessage: 'No results for selected location.'
+            })
         });
     }
 

@@ -17,13 +17,14 @@ class App extends React.Component {
             mode: 'basic',
             params: {
                 selectedPoint: null,
-                localClimate: '1981-2010',
-                searchClimate: '2050-2079',
+                localClimate: '',
+                searchClimate: '',
                 monthsType: 'All',
                 months: [true,true,true,true,true,true,true,true,true,true,true,true],
                 cdVar: 'full',
                 nSites: 5000
             },
+            warningMessage: '',
             resultParams: {}
         };
     }
@@ -71,12 +72,8 @@ class App extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.fetchClimateMatch()
-    }
 
-    fetchClimateMatch = () => {
-
-        var { params } = this.state;
+        const { params } = this.state;
         var nParams = 0, nParamsSet = 0;
         for (var paramName in params) {
             if (Object.prototype.hasOwnProperty.call(params, paramName)) {
@@ -87,49 +84,61 @@ class App extends React.Component {
             }
         }
         if ( nParamsSet === nParams ) {
-            
-            this.setState({
-                climateGeojson: '',
-                loading: true,
-                resultParams: {}
-            })
-
-            var { selectedPoint, localClimate, searchClimate, months, cdVar, nSites } = params;
-
-            months = months.map((b, i) => b ? i+1 : null).filter((m) => m)
-
-            fetch(`${API_URL_ClimateMatch}?lat=${selectedPoint.lat}&lon=${selectedPoint.lng}&m=${months}&fc=${localClimate}&lc=${searchClimate}&v=${cdVar}&n=${nSites}`)
-            .then(handleResponse)
-            .then((result) => {
-                if ( result ) {
-                    const resultParams = {
-                        selectedPoint: selectedPoint,
-                        localClimate: localClimate,
-                        searchClimate: searchClimate,
-                        months: months,
-                        cdVar: cdVar,
-                        nSites: nSites
-                    }
-                    this.setState({
-                        resultParams: resultParams,
-                        climateGeojson: result,
-                        cellHalfWidth: 0.09999999999999999167 / 2,
-                        loading: false
-                    })
-                } else {
-                    this.setState({
-                        resultParams: {},
-                        climateGeojson: '',
-                        cellHalfWidth: null,
-                        loading: false
-                    })
-                }
-            })
-            .catch((error, d) => {
-                console.log('error',error, d)
-            });
-
+            this.fetchClimateMatch()
+        } else {
+            var warningMessage = '';
+            if (nParamsSet === nParams - 1 && !params.selectedPoint) {
+                warningMessage = 'Select a location on the map.'
+            } else {
+                warningMessage = 'Ensure all parameters have been set.'
+            }
+            this.setState({warningMessage: warningMessage})
         }
+    }
+
+    fetchClimateMatch = () => {
+
+        this.setState({
+            climateGeojson: '',
+            loading: true,
+            warningMessage: '',
+            resultParams: {}
+        })
+
+        var { selectedPoint, localClimate, searchClimate, months, cdVar, nSites } = this.state.params;
+
+        months = months.map((b, i) => b ? i+1 : null).filter((m) => m)
+
+        fetch(`${API_URL_ClimateMatch}?lat=${selectedPoint.lat}&lon=${selectedPoint.lng}&m=${months}&fc=${localClimate}&lc=${searchClimate}&v=${cdVar}&n=${nSites}`)
+        .then(handleResponse)
+        .then((result) => {
+            if ( result ) {
+                const resultParams = {
+                    selectedPoint: selectedPoint,
+                    localClimate: localClimate,
+                    searchClimate: searchClimate,
+                    months: months,
+                    cdVar: cdVar,
+                    nSites: nSites
+                }
+                this.setState({
+                    resultParams: resultParams,
+                    climateGeojson: result,
+                    cellHalfWidth: 0.09999999999999999167 / 2,
+                    loading: false
+                })
+            } else {
+                this.setState({
+                    resultParams: {},
+                    climateGeojson: '',
+                    cellHalfWidth: null,
+                    loading: false
+                })
+            }
+        })
+        .catch((error, d) => {
+            console.log('error',error, d)
+        });
     }
 
     render() {
@@ -140,10 +149,11 @@ class App extends React.Component {
                     height='48px'/> }
                 <Outputs
                     selectedPoint={this.state.params.selectedPoint}
-                    handleMapClick={this.handleMapClick}
                     resultParams={this.state.resultParams}
                     climateGeojson={this.state.climateGeojson}
-                    cellHalfWidth={this.state.cellHalfWidth} />
+                    cellHalfWidth={this.state.cellHalfWidth}
+                    warningMessage={this.state.warningMessage}
+                    handleMapClick={this.handleMapClick} />
                 <Inputs
                     mode={this.state.mode}
                     params={this.state.params}

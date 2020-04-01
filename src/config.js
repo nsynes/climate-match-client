@@ -1,4 +1,4 @@
-export const API_Domain = process.env.NODE_ENV === 'production' ? 'https://climate-api.nicksynes.com' : 'http://localhost:8000';
+export const API_Domain = process.env.NODE_ENV === 'production' ? 'https://climate-api.nicksynes.com' : 'http://localhost:4001';
 export const API_URL_ClimateMatch = `${API_Domain}`;
 export const URL_Map_Tiles = process.env.NODE_ENV === 'production' ? 'https://{s}.tile.osm.org/{z}/{x}/{y}.png' : 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
 

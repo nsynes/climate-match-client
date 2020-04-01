@@ -21,8 +21,8 @@ const ParametersBasic = (props) => {
                 {monthsType === 'Specific Months' &&
                     <Checkboxes name='Specific Months' varName='months' initialValue={months} listBoxeNames={listMonths} handleChange={props.handleCheckboxChange} />
                 }
-            </form>
-                <div style={{display:'flex', flexDirection: 'row'}}>
+                <div style={{width: '100%', display:'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <div style={{flexGrow: 1}}></div>
                     <Button
                         name='Calculate'
                         handleClick={props.handleCalculate} />
@@ -30,6 +30,7 @@ const ParametersBasic = (props) => {
                         name='Refresh'
                         handleClick={props.handleRefresh} />
                 </div>
+            </form>
         </div>
     );
 }

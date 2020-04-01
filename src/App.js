@@ -1,11 +1,9 @@
 import React from 'react';
-import fetch from 'isomorphic-unfetch';
 import Outputs from './components/Outputs';
 import Inputs from './components/Inputs';
 import Loading from './components/Loading';
 import { API_URL_ClimateMatch } from './config';
 import{ handleResponse } from './helpers';
-require('es6-promise').polyfill();
 
 
 class App extends React.Component {

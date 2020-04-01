@@ -1,4 +1,5 @@
 import React from 'react';
+import fetch from 'isomorphic-unfetch';
 import Outputs from './components/Outputs';
 import Inputs from './components/Inputs';
 import Loading from './components/Loading';

@@ -3,6 +3,7 @@
     flex-flow: column;
     float: left;
     height: 100%;
+    width: 100%;
 }
 .help-header {
     height: 3em;

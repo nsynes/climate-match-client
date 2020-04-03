@@ -5,7 +5,7 @@ const B4ESTLogo = (props) => {
 
     return (
         <div >
-            <img src={B4ESTJpg} style={{height:50, marginRight: '1em'}} />
+            <img src={B4ESTJpg} alt='B4EST logo' style={{height:50, marginRight: '1em'}} />
         </div>
     );
 }

@@ -10,14 +10,14 @@ const SummaryText = (props) => {
     return (
         <div style={{marginRight: '0.25em'}}>
             {`
-             ${searchClimateEndDate < 2020 ? `Areas that currently (${searchClimate}) have` : 'Areas that will have'}
+             ${searchClimateEndDate <= 2020 ? `Areas that currently (${searchClimate}) have` : 'Areas that will have'}
              ${cdVar === 'full' ? 'a similar' : 'similar'}
              ${cdVar === 'full' ? 'climate'
                 : cdVar === 'temp' ? 'temperatures'
                     : cdVar === 'prec' ? 'precipitation'
                         : ''}
-             ${searchClimateEndDate < 2020 ? '' : `in ${searchClimate}`}
-             to ${localClimateEndDate < 2020 ? cdVar === 'full' ? `the current (${localClimate}) climate`
+             ${searchClimateEndDate <= 2020 ? '' : `in ${searchClimate}`}
+             to ${localClimateEndDate <= 2020 ? cdVar === 'full' ? `the current (${localClimate}) climate`
                 : cdVar === 'temp' ? `current (${localClimate}) temperatures`
                     : cdVar === 'prec' ? `current (${localClimate}) precipitation`
                         : ''

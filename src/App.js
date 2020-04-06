@@ -70,7 +70,9 @@ class App extends React.Component {
         });
     }
 
-    handleRefresh = () => {
+    handleRefresh = (e) => {
+        e.preventDefault();
+
         window.location.reload();
     }
 

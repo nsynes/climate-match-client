@@ -1,4 +1,5 @@
 import React from 'react';
+import HelmetTags from './components/HelmetTags';
 import Outputs from './components/Outputs';
 import Inputs from './components/Inputs';
 import Loading from './components/Loading';
@@ -156,6 +157,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
+                <HelmetTags />
                 { this.state.loading && <Loading
                     width='48px'
                     height='48px'/> }

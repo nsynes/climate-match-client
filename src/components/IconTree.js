@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import './IconTree.css';
 
 const IconTree = new L.Icon({
     iconUrl: require('../img/tree.png'),
@@ -8,7 +9,8 @@ const IconTree = new L.Icon({
     shadowUrl: null,
     shadowSize: null,
     shadowAnchor: null,
-    iconSize: new L.Point(34,41)
+    iconSize: new L.Point(34,41),
+    className: 'icon-tree'
 });
 
 export { IconTree };

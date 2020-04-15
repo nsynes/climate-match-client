@@ -24,9 +24,11 @@ const ParametersBasic = (props) => {
                 <div style={{width: '100%', display:'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                     <div style={{flexGrow: 1}}></div>
                     <Button
+                        loading={props.loading}
                         name='Calculate'
                         handleClick={props.handleCalculate} />
                     <Button
+                        loading={props.loading}
                         name='Refresh'
                         handleClick={props.handleRefresh} />
                 </div>

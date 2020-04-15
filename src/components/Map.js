@@ -22,7 +22,7 @@ class Map extends React.Component {
         }
     }
 
-    perc2colorRED = (value) => {
+    perc2color = (value) => {
         const fraction = ((value - this.state.minValue) / (this.state.maxValue - this.state.minValue))
 
         const g = Math.round(0 + 255 * fraction);
@@ -33,7 +33,7 @@ class Map extends React.Component {
         return '#' + ('000000' + h.toString(16)).slice(-6);
     }
 
-    perc2color = (value) => {
+    perc2colorGREEN = (value) => {
         const fraction = ((value - this.state.minValue) / (this.state.maxValue - this.state.minValue))
 
         const g = Math.round(40 + 215 * fraction);

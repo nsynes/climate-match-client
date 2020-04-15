@@ -22,3 +22,7 @@
     box-shadow: 1px 1px black;
     transform: translateY(2px);
 }
+.submit-button:disabled,
+button[disabled] {
+    background-color: rgb(210,210,210);
+}

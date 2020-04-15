@@ -13,6 +13,7 @@ const Inputs = (props) => {
                 mode={props.mode}
                 handleModeChange={props.handleModeChange} />
             <Parameters
+                loading={props.loading}
                 mode={props.mode}
                 localClimate={props.params.localClimate}
                 searchClimate={props.params.searchClimate}

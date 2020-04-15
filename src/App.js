@@ -187,6 +187,7 @@ class App extends React.Component {
                     warningMessage={this.state.warningMessage}
                     handleMapClick={this.handleMapClick} />
                 <Inputs
+                    loading={this.state.loading}
                     mode={this.state.mode}
                     params={this.state.params}
                     handleModeChange={this.handleModeChange}

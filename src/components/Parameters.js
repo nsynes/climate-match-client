@@ -7,6 +7,7 @@ const Parameters = (props) => {
     if ( props.mode === 'Advanced' ) {
         return (
             <ParametersAdvanced
+                loading={props.loading}
                 localClimate={props.localClimate}
                 searchClimate={props.searchClimate}
                 monthsType={props.monthsType}
@@ -21,6 +22,7 @@ const Parameters = (props) => {
     } else {
         return (
             <ParametersBasic
+                loading={props.loading}
                 localClimate={props.localClimate}
                 searchClimate={props.searchClimate}
                 monthsType={props.monthsType}

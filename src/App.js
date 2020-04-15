@@ -3,8 +3,8 @@ import HelmetTags from './components/HelmetTags';
 import Outputs from './components/Outputs';
 import Inputs from './components/Inputs';
 import Loading from './components/Loading';
-import { API_URL_ClimateMatch } from './config';
-import{ handleResponse } from './helpers';
+import { API_URL_ClimateMatch, paramDefaults } from './config';
+import { handleResponse } from './helpers';
 
 
 class App extends React.Component {
@@ -15,22 +15,34 @@ class App extends React.Component {
             loading: false,
             climateGeojson: '',
             cellHalfWidth: null,
-            mode: 'basic',
+            mode: 'Basic',
             params: {
-                selectedPoint: null,
-                localClimate: '',
-                searchClimate: '',
-                monthsType: 'All',
-                months: [true,true,true,true,true,true,true,true,true,true,true,true],
-                cdVar: 'full',
-                nSites: 5000
+                selectedPoint: paramDefaults.selectedPoint,
+                localClimate: paramDefaults.localClimate,
+                searchClimate: paramDefaults.searchClimate,
+                monthsType: paramDefaults.monthsType,
+                months: paramDefaults.months,
+                cdVar: paramDefaults.cdVar,
+                nSites: paramDefaults.nSites
             },
             warningMessage: '',
             resultParams: {}
         };
     }
 
+    resetDefaults = () => {
+        var { params } = this.state;
+        params.nSites = paramDefaults.nSites;
+        this.setState({
+            params: params
+        });
+    }
+
     handleModeChange = (e) => {
+        const mode = e.target.value;
+        if ( mode === 'Basic' ) {
+            this.resetDefaults()
+        }
         this.setState({
             mode: e.target.value
         })
@@ -91,7 +103,13 @@ class App extends React.Component {
             }
         }
         if ( nParamsSet === nParams ) {
-            this.fetchClimateMatch()
+            if ( params.months.filter(v => v).length > 1 ) {
+                this.fetchClimateMatch()
+            } else {
+                // Need at least two months since the calculations include division by (max - min) of month values
+                this.setState({warningMessage: 'Cannot match climate for a single month.'})
+            }
+            
         } else {
             var warningMessage = '';
             if (nParamsSet === nParams - 1 && !params.selectedPoint) {

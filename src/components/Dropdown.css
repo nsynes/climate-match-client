@@ -1,0 +1,31 @@
+.dropbox-container.label-above {
+    padding: 0 1em 1em 1em;
+}
+.dropbox-container.label-left {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1em;
+    border-bottom: 1px solid rgb(230,230,230);
+}
+label.label-left {
+    float: left;
+    padding-right: .5em;
+}
+
+.dropdown {
+    border-radius: 5px;
+}
+.dropdown:hover {
+    border-color: #000;
+}
+.dropdown:focus {
+	border-color: #aaa;
+	color: #000;
+	/*outline: none;*/
+}
+.dropdown:disabled, .dropdown[aria-disabled=true] {
+	color: graytext;
+}
+.dropdown:disabled:hover, .dropdown[aria-disabled=true] {
+	border-color: #aaa;
+}

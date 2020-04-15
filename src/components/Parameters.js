@@ -4,9 +4,19 @@ import ParametersAdvanced from './ParametersAdvanced';
 
 const Parameters = (props) => {
 
-    if ( props.mode === 'advanced' ) {
+    if ( props.mode === 'Advanced' ) {
         return (
-            <ParametersAdvanced />
+            <ParametersAdvanced
+                localClimate={props.localClimate}
+                searchClimate={props.searchClimate}
+                monthsType={props.monthsType}
+                months={props.months}
+                cdVar={props.cdVar}
+                nSites={props.nSites}
+                handleDropdownChange={props.handleDropdownChange}
+                handleCheckboxChange={props.handleCheckboxChange}
+                handleCalculate={props.handleCalculate}
+                handleRefresh={props.handleRefresh} />
         )
     } else {
         return (

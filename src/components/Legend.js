@@ -15,7 +15,7 @@ const Legend = (props) => {
                 <div className='legend-text-container'>
                     <div className='legend-text'>Closest match</div>
                     <div className='legend-text-spacer'></div>
-                    <div className='legend-text'>{props.nSites}<sup>th</sup> match</div>
+                    <div className='legend-text'>{props.nSites.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<sup>th</sup> match</div>
                 </div>
             </div>
         </div>

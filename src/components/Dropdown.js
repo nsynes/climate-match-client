@@ -1,9 +1,10 @@
 import React from 'react';
+import './Dropdown.css';
 
 const Dropdown = (props) => {
 
 
-    const { initialValue, listOptions, name, varName } = props;
+    const { initialValue, listOptions, name, varName, leftLabel } = props;
 
     var options = [];
     if ( listOptions && typeof(listOptions[0]) !== 'object' ) {
@@ -13,11 +14,11 @@ const Dropdown = (props) => {
     }
 
     return (
-        <div style={{padding: '0 1em 1em 1em'}}>
-            <label>
+        <div className={`dropbox-container label-${leftLabel ? 'left' : 'above'}`}>
+            <label className={`label-${leftLabel ? 'left' : ''}`}>
                 {name}
             </label>
-                <select defaultValue={initialValue} onChange={(e) => props.handleChange(e, varName)}>
+                <select className='dropdown' defaultValue={initialValue} onChange={(e) => props.handleChange(e, varName)}>
                     <option value="" disabled hidden>Please select...</option>
                     {options}
                 </select>

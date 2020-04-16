@@ -40,13 +40,13 @@ class App extends React.Component {
         });
     }
 
-    handleModeChange = (e) => {
-        const mode = e.target.value;
+    handleModeChange = (value) => {
+        const mode = value;
         if ( mode === 'Basic' ) {
             this.resetDefaults()
         }
         this.setState({
-            mode: e.target.value
+            mode: mode
         })
     }
 
@@ -60,9 +60,9 @@ class App extends React.Component {
         }
     }
 
-    handleDropdownChange = (e, name) => {
+    handleDropdownChange = (value, name) => {
         var { params } = this.state;
-        params[name] = e.target.value;
+        params[name] = value;
         // Group control for growing season selection
         if ( name === 'monthsType' ) {
             if ( params[name] === 'All' ) {
@@ -93,6 +93,8 @@ class App extends React.Component {
 
     handleCalculate = (e) => {
         e.preventDefault();
+        
+        console.log('fetch...', this.state.params)
 
         const { params } = this.state;
         var nParams = 0, nParamsSet = 0;
@@ -138,19 +140,23 @@ class App extends React.Component {
 
         fetch(`${API_URL_ClimateMatch}?lat=${selectedPoint.lat}&lon=${selectedPoint.lng}&m=${months}&fc=${localClimate}&lc=${searchClimate}&v=${cdVar}&n=${nSites}&r=${region}`)
         .then(handleResponse)
-        .then((result) => {
-            if ( result ) {
+        .then((geojson) => {
+            if ( geojson ) {
+                const minCD = Math.min.apply(Math, geojson.features.map(function(o) { return o.properties.cd; }))
+                const maxCD = Math.max.apply(Math, geojson.features.map(function(o) { return o.properties.cd; }))
                 const resultParams = {
                     selectedPoint: selectedPoint,
                     localClimate: localClimate,
                     searchClimate: searchClimate,
                     months: months,
                     cdVar: cdVar,
-                    nSites: nSites
+                    nSites: nSites,
+                    minCD: minCD,
+                    maxCD: maxCD
                 }
                 this.setState({
                     resultParams: resultParams,
-                    climateGeojson: result,
+                    climateGeojson: geojson,
                     cellHalfWidth: 0.09999999999999999167 / 2,
                     loading: false
                 })

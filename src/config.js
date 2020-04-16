@@ -22,4 +22,4 @@ export const listMonthsTypes = ['All','Growing Season (Apr-Sep)','Specific Month
 export const cdVarNames = [{'full':'Precipitation, Temperature and Diurnal Range'},{'prec':'Precipitation'},{'temp':'Temperature and Diurnal Range'}]
 export const listnSites = [{200: 'Narrow'},{1000: 'Medium'},{5000: 'Wide'}];
 export const listRegions = ['Europe','PNW'];
-export const listModes = ['Basic', 'Advanced'];
+export const listModes = ['Basic','Basic (old)', 'Advanced'];

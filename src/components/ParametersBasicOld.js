@@ -3,18 +3,17 @@ import Button from './Button';
 import Checkboxes from './Checkboxes';
 import Dropdown from './Dropdown';
 import './Parameters.css';
-import { baselineYears10, baselineYears30, futureYears10, futureYears30, listMonthsTypes, listMonths, cdVarNames, listnSites, listRegions } from '../config';
+import { baselineYears10, baselineYears30, futureYears10, futureYears30, listMonthsTypes, listMonths, cdVarNames } from '../config';
 
-const ParametersAdvanced = (props) => {
+const ParametersBasic = (props) => {
 
     const years = [baselineYears10.concat(futureYears10), baselineYears30.concat(futureYears30)];
 
-    const { localClimate, searchClimate, cdVar, monthsType, months, nSites, region } = props;
-    
+    const { localClimate, searchClimate, cdVar, monthsType, months } = props;
+
     return (
         <div className='form-container'>
             <form className='form-inline'>
-                <Dropdown name='Region' varName='region' initialValue={region} listOptions={listRegions} handleChange={props.handleDropdownChange} />
                 <Dropdown name='Local Climate' varName='localClimate' initialValue={localClimate} groups={['10 year average','30 year average']} listOptions={years} handleChange={props.handleDropdownChange} />
                 <Dropdown name='Search Climate' varName='searchClimate' initialValue={searchClimate} groups={['10 year average','30 year average']} listOptions={years} handleChange={props.handleDropdownChange} />
                 <Dropdown name='Variables' varName='cdVar' initialValue={cdVar} listOptions={cdVarNames} handleChange={props.handleDropdownChange} />
@@ -22,8 +21,6 @@ const ParametersAdvanced = (props) => {
                 {monthsType === 'Specific Months' &&
                     <Checkboxes name='Specific Months' varName='months' initialValue={months} listBoxeNames={listMonths} handleChange={props.handleCheckboxChange} />
                 }
-                <Dropdown name='Number of matches' varName='nSites' initialValue={nSites} listOptions={listnSites} handleChange={props.handleDropdownChange} />
-                
                 <div style={{width: '100%', display:'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                     <div style={{flexGrow: 1}}></div>
                     <Button
@@ -40,4 +37,4 @@ const ParametersAdvanced = (props) => {
     );
 }
 
-export default ParametersAdvanced;
+export default ParametersBasic;

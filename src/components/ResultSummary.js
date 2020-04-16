@@ -37,7 +37,14 @@ class ResultSummary extends React.Component {
                             <div className='summary-text'>
                                 <SummaryText
                                     resultParams={this.props.resultParams} />                
-                                <Legend nSites={this.props.resultParams.nSites} />
+                                <Legend
+                                    display={this.props.display}
+                                    colour={this.props.colour}
+                                    nSites={this.props.resultParams.nSites}
+                                    minCD={this.props.resultParams.minCD}
+                                    maxCD={this.props.resultParams.maxCD}
+                                    handleColourChange={this.props.handleColourChange}
+                                    handleDisplayChange={this.props.handleDisplayChange} />
                             </div>
                             <ResultParameters
                                 resultParams={this.props.resultParams} />

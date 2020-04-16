@@ -6,60 +6,22 @@ import { URL_Map_Tiles } from '../config';
 import './Map.css';
 import Europe from '../data/Europe.json';
 import PNW from '../data/PNW.json';
+import { getColorFromFraction } from '../helpers';
 
-class Map extends React.Component {
+const Map = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.state= {
-            minValue: null,
-            maxValue: null,
-            nValues: null
-        }
-    }
-
-    onEachFeature = (feature, layer) => {
+    var onEachFeature = (feature, layer) => {
         if (feature.properties && feature.properties.cd && feature.properties.n) {
-            layer.bindPopup(`<b>Rank</b>: ${feature.properties.n} of ${this.state.nValues}<br /><b>CD</b>: ${feature.properties.cd}`);
+            layer.bindPopup(`<b>Rank</b>: ${feature.properties.n} of ${props.resultParams.nSites}<br /><b>CD</b>: ${feature.properties.cd}`);
         }
     }
 
-    perc2color = (value) => {
-        const fraction = ((value - this.state.minValue) / (this.state.maxValue - this.state.minValue))
-
-        const g = Math.round(0 + 255 * fraction);
-        //const r = 255;
-        //const b = 0
-        //const h = r * 0x10000 + g * 0x100 + b * 0x1;
-        //console.log(`${fraction}: ${r},${g},${b}`)
-        const h = 255 * 0x10000 + g * 0x100 + 0 * 0x1;
-        return '#' + ('000000' + h.toString(16)).slice(-6);
-    }
-
-    perc2colorGREEN = (value) => {
-        const fraction = ((value - this.state.minValue) / (this.state.maxValue - this.state.minValue))
-
-        const g = Math.round(40 + 215 * fraction);
-        const r = 0;
-        const b = Math.round(0 + 100 * fraction);
-        //console.log(`${fraction}: ${r},${g},${b}`)
-        const h = r * 0x10000 + g * 0x100 + b * 0x1;
-        return '#' + ('000000' + h.toString(16)).slice(-6);
-    }
-    perc2colorGREY = (value) => {
-        const fraction = ((value - this.state.minValue) / (this.state.maxValue - this.state.minValue))
-
-        const g = Math.round(25 + 150 * fraction);
-        const r = Math.round(25 + 150 * fraction);
-        const b = Math.round(25 + 150 * fraction);
-        //console.log(`${fraction}: ${r},${g},${b}`)
-        const h = r * 0x10000 + g * 0x100 + b * 0x1;
-        return '#' + ('000000' + h.toString(16)).slice(-6);
-    }
-
-    setStyle = (feature) => {
-        //console.log('feature.properties',feature.properties)
-        const colour = this.perc2color(feature.properties.cd);
+    var setStyle = (feature) => {
+        const fraction = props.display === 'rank' ?
+            (feature.properties.n) / (props.resultParams.nSites) :
+            (feature.properties.cd - props.resultParams.minCD) / (props.resultParams.maxCD - props.resultParams.minCD);
+        const colour = getColorFromFraction(fraction, props.colour)
+        
         const geojsonMarkerOptions = {
             fillColor: colour,
             color: colour,
@@ -72,23 +34,11 @@ class Map extends React.Component {
             lng: feature.geometry.coordinates[0],
             lat: feature.geometry.coordinates[1]
         }
-        const bounds = [[latlng.lat-this.props.cellHalfWidth, latlng.lng-this.props.cellHalfWidth], [latlng.lat+this.props.cellHalfWidth, latlng.lng+this.props.cellHalfWidth]];
+        const bounds = [[latlng.lat-props.cellHalfWidth, latlng.lng-props.cellHalfWidth], [latlng.lat+props.cellHalfWidth, latlng.lng+props.cellHalfWidth]];
         return L.rectangle(bounds, geojsonMarkerOptions)
     };
 
-    static getDerivedStateFromProps = (nextProps, prevState) => {
-        var minValue = null;
-        var maxValue = null;
-        var nValues = null;
-        if ( nextProps.climateGeojson && nextProps.climateGeojson.features ) {
-            minValue = Math.min.apply(Math, nextProps.climateGeojson.features.map(function(o) { return o.properties.cd; }))
-            maxValue = Math.max.apply(Math, nextProps.climateGeojson.features.map(function(o) { return o.properties.cd; }))
-            nValues = nextProps.climateGeojson.features.length;
-        }
-        return {minValue: minValue, maxValue: maxValue, nValues: nValues}
-    }
-
-    regionStyle = (feature) => {
+    var regionStyle = (feature) => {
         return {
             fillOpacity: 0.2,
             fillColor: '#A9A9A9',
@@ -96,55 +46,53 @@ class Map extends React.Component {
             stroke: true,
             weight: 0.8,
             opacity: 1,
-            dashArray: '5,5',
+            dashArray: '5,5'
         };
     }
 
-
-    render() {
-
-        return (
-            <div>
-                <LeafletMap
-                    className={ !this.props.loading && this.props.climateGeojson === '' ? 'leaflet-map' : ''}
-                    style={{height: 1000}}
-                    center={[50, 10]}
-                    zoom={4}
-                    maxZoom={19}
-                    attributionControl={true}
-                    doubleClickZoom={true}
-                    scrollWheelZoom={true}
-                    dragging={true}
-                    animate={true}
-                    easeLinearity={0.35}
-                    zoomControl={false}
-                    onClick={this.props.handleMapClick}>
-                    <ZoomControl position='bottomright' />
-                    <TileLayer
-                        url={URL_Map_Tiles}
-                    />
-                    { this.props.selectedPoint && <Marker position={this.props.selectedPoint} icon={IconTree} draggable={false}>
-                    </Marker> }
-                    { this.props.climateGeojson && <GeoJSON
-                        key={'geojson01'}
-                        data={this.props.climateGeojson}
-                        pointToLayer={this.setStyle}
-                        onEachFeature={this.onEachFeature}>
+    return (
+        <div>
+            <LeafletMap
+                className={ !props.loading && props.climateGeojson === '' ? 'leaflet-map' : ''}
+                style={{height: 1000}}
+                center={[50, 10]}
+                zoom={4}
+                maxZoom={19}
+                attributionControl={true}
+                doubleClickZoom={true}
+                scrollWheelZoom={true}
+                dragging={true}
+                animate={true}
+                easeLinearity={0.35}
+                zoomControl={false}
+                onClick={props.handleMapClick}>
+                <ZoomControl position='bottomright' />
+                <TileLayer
+                    url={URL_Map_Tiles}
+                />
+                { props.selectedPoint && <Marker position={props.selectedPoint} icon={IconTree} draggable={false}>
+                </Marker> }
+                {props.climateGeojson ?
+                    <GeoJSON
+                        key={`climate-by-${props.display}-${props.colour}`}
+                        data={props.climateGeojson}
+                        pointToLayer={setStyle}
+                        onEachFeature={onEachFeature}>
+                    </GeoJSON> :
+                    null}
+                { props.region === 'Europe' &&
+                    <GeoJSON
+                        data={Europe}
+                        style={regionStyle}>
                     </GeoJSON> }
-                    { this.props.region === 'Europe' &&
-                        <GeoJSON
-                            data={Europe}
-                            style={this.regionStyle}>
-                        </GeoJSON> }
-                    { this.props.region === 'PNW' &&
-                        <GeoJSON
-                            data={PNW}
-                            style={this.regionStyle}>
-                        </GeoJSON> }
-                </LeafletMap>
-            </div>
-        );
-    }
+                { props.region === 'PNW' &&
+                    <GeoJSON
+                        data={PNW}
+                        style={regionStyle}>
+                    </GeoJSON> }
+            </LeafletMap>
+        </div>
+    );
 }
 
 export default Map;

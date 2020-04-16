@@ -1,5 +1,6 @@
 import React from 'react';
 import ParametersBasic from './ParametersBasic';
+import ParametersBasicOld from './ParametersBasicOld';
 import ParametersAdvanced from './ParametersAdvanced';
 
 const Parameters = (props) => {
@@ -20,7 +21,7 @@ const Parameters = (props) => {
                 handleCalculate={props.handleCalculate}
                 handleRefresh={props.handleRefresh} />
         )
-    } else {
+    } else if ( props.mode === 'Basic' ) {
         return (
             <ParametersBasic
                 loading={props.loading}
@@ -34,7 +35,21 @@ const Parameters = (props) => {
                 handleCalculate={props.handleCalculate}
                 handleRefresh={props.handleRefresh} />
         )
-    }
+    } else if ( props.mode === 'Basic (old)' ) {
+        return (
+            <ParametersBasicOld
+                loading={props.loading}
+                localClimate={props.localClimate}
+                searchClimate={props.searchClimate}
+                monthsType={props.monthsType}
+                months={props.months}
+                cdVar={props.cdVar}
+                handleDropdownChange={props.handleDropdownChange}
+                handleCheckboxChange={props.handleCheckboxChange}
+                handleCalculate={props.handleCalculate}
+                handleRefresh={props.handleRefresh} />
+        )
+    } 
 
 }
 

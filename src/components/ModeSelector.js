@@ -11,13 +11,3 @@ const ModeSelector = (props) => {
 }
 
 export default ModeSelector;
-
-/*
-<label style={{float: 'left', paddingRight: '.5em'}}>
-    Mode
-</label>
-<select defaultValue={props.mode} onChange={props.handleModeChange} >
-    <option value="basic" >Basic</option>
-    <option value="advanced" >Advanced</option>
-</select>
-*/

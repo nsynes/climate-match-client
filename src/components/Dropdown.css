@@ -14,6 +14,10 @@ label.label-left {
 
 .dropdown {
     border-radius: 5px;
+    -webkit-transition : border .5s ease-out;
+    -moz-transition : border .5s ease-out;
+    -o-transition : border .5s ease-out;
+    transition : border .5s ease-out;
 }
 .dropdown:hover {
     border-color: #000;

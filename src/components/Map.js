@@ -4,6 +4,8 @@ import L from 'leaflet';
 import {  IconTree  } from './IconTree';
 import { URL_Map_Tiles } from '../config';
 import './Map.css';
+import Europe from '../data/Europe.json';
+import PNW from '../data/PNW.json';
 
 class Map extends React.Component {
 
@@ -26,10 +28,11 @@ class Map extends React.Component {
         const fraction = ((value - this.state.minValue) / (this.state.maxValue - this.state.minValue))
 
         const g = Math.round(0 + 255 * fraction);
-        const r = 255;
-        const b = 0
+        //const r = 255;
+        //const b = 0
+        //const h = r * 0x10000 + g * 0x100 + b * 0x1;
         //console.log(`${fraction}: ${r},${g},${b}`)
-        const h = r * 0x10000 + g * 0x100 + b * 0x1;
+        const h = 255 * 0x10000 + g * 0x100 + 0 * 0x1;
         return '#' + ('000000' + h.toString(16)).slice(-6);
     }
 
@@ -55,6 +58,7 @@ class Map extends React.Component {
     }
 
     setStyle = (feature) => {
+        //console.log('feature.properties',feature.properties)
         const colour = this.perc2color(feature.properties.cd);
         const geojsonMarkerOptions = {
             fillColor: colour,
@@ -84,9 +88,20 @@ class Map extends React.Component {
         return {minValue: minValue, maxValue: maxValue, nValues: nValues}
     }
 
+    regionStyle = (feature) => {
+        return {
+            fillOpacity: 0.2,
+            fillColor: '#A9A9A9',
+            color: '#000000',
+            stroke: true,
+            weight: 0.8,
+            opacity: 1,
+            dashArray: '5,5',
+        };
+    }
+
 
     render() {
-
 
         return (
             <div>
@@ -116,6 +131,16 @@ class Map extends React.Component {
                         pointToLayer={this.setStyle}
                         onEachFeature={this.onEachFeature}>
                     </GeoJSON> }
+                    { this.props.region === 'Europe' &&
+                        <GeoJSON
+                            data={Europe}
+                            style={this.regionStyle}>
+                        </GeoJSON> }
+                    { this.props.region === 'PNW' &&
+                        <GeoJSON
+                            data={PNW}
+                            style={this.regionStyle}>
+                        </GeoJSON> }
                 </LeafletMap>
             </div>
         );

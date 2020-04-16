@@ -12,7 +12,8 @@ const Outputs = (props) => {
             <SidePanel />
             <ResultSummary
                 resultParams={props.resultParams} />
-            <Map 
+            <Map
+                region={props.region}
                 selectedPoint={props.selectedPoint}
                 handleMapClick={props.handleMapClick} 
                 climateGeojson={props.climateGeojson}

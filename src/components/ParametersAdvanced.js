@@ -3,14 +3,13 @@ import Button from './Button';
 import Checkboxes from './Checkboxes';
 import Dropdown from './Dropdown';
 import './Parameters.css';
-import { baselineYears, futureYears, listMonthsTypes, listMonths, cdVarNames, listnSites } from '../config';
+import { baselineYears10, baselineYears30, futureYears10, futureYears30, listMonthsTypes, listMonths, cdVarNames, listnSites, listRegions } from '../config';
 
 const ParametersAdvanced = (props) => {
 
-    const years = baselineYears.concat(futureYears);
+    const years = baselineYears10.concat(baselineYears30, futureYears10, futureYears30);
 
-    const { localClimate, searchClimate, cdVar, monthsType, months, nSites } = props;
-
+    const { localClimate, searchClimate, cdVar, monthsType, months, nSites, region } = props;
     /*
     return (
             <div style={{textAlign: 'center'}}><br/>Advanced mode in development...<br/><br/></div>
@@ -19,6 +18,7 @@ const ParametersAdvanced = (props) => {
    return (
         <div className='form-container'>
             <form className='form-inline'>
+                <Dropdown name='Region' varName='region' initialValue={region} listOptions={listRegions} handleChange={props.handleDropdownChange} />
                 <Dropdown name='Local Climate' varName='localClimate' initialValue={localClimate} listOptions={years} handleChange={props.handleDropdownChange} />
                 <Dropdown name='Search Climate' varName='searchClimate' initialValue={searchClimate} listOptions={years} handleChange={props.handleDropdownChange} />
                 <Dropdown name='Variables' varName='cdVar' initialValue={cdVar} listOptions={cdVarNames} handleChange={props.handleDropdownChange} />

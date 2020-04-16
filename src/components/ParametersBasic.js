@@ -3,11 +3,11 @@ import Button from './Button';
 import Checkboxes from './Checkboxes';
 import Dropdown from './Dropdown';
 import './Parameters.css';
-import { baselineYears, futureYears, listMonthsTypes, listMonths, cdVarNames } from '../config';
+import { baselineYears10, baselineYears30, futureYears10, futureYears30, listMonthsTypes, listMonths, cdVarNames } from '../config';
 
 const ParametersBasic = (props) => {
 
-    const years = baselineYears.concat(futureYears);
+    const years = baselineYears10.concat(baselineYears30, futureYears10, futureYears30);
 
     const { localClimate, searchClimate, cdVar, monthsType, months } = props;
 

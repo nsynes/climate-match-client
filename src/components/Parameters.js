@@ -14,6 +14,7 @@ const Parameters = (props) => {
                 months={props.months}
                 cdVar={props.cdVar}
                 nSites={props.nSites}
+                region={props.region}
                 handleDropdownChange={props.handleDropdownChange}
                 handleCheckboxChange={props.handleCheckboxChange}
                 handleCalculate={props.handleCalculate}

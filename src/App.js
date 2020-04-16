@@ -23,7 +23,8 @@ class App extends React.Component {
                 monthsType: paramDefaults.monthsType,
                 months: paramDefaults.months,
                 cdVar: paramDefaults.cdVar,
-                nSites: paramDefaults.nSites
+                nSites: paramDefaults.nSites,
+                region: paramDefaults.region
             },
             warningMessage: '',
             resultParams: {}
@@ -33,6 +34,7 @@ class App extends React.Component {
     resetDefaults = () => {
         var { params } = this.state;
         params.nSites = paramDefaults.nSites;
+        params.region = paramDefaults.region;
         this.setState({
             params: params
         });
@@ -130,11 +132,11 @@ class App extends React.Component {
             resultParams: {}
         })
 
-        var { selectedPoint, localClimate, searchClimate, months, cdVar, nSites } = this.state.params;
+        var { selectedPoint, localClimate, searchClimate, months, cdVar, nSites, region } = this.state.params;
 
         months = months.map((b, i) => b ? i+1 : null).filter((m) => m)
 
-        fetch(`${API_URL_ClimateMatch}?lat=${selectedPoint.lat}&lon=${selectedPoint.lng}&m=${months}&fc=${localClimate}&lc=${searchClimate}&v=${cdVar}&n=${nSites}`)
+        fetch(`${API_URL_ClimateMatch}?lat=${selectedPoint.lat}&lon=${selectedPoint.lng}&m=${months}&fc=${localClimate}&lc=${searchClimate}&v=${cdVar}&n=${nSites}&r=${region}`)
         .then(handleResponse)
         .then((result) => {
             if ( result ) {
@@ -180,6 +182,7 @@ class App extends React.Component {
                     width='48px'
                     height='48px'/> }
                 <Outputs
+                    region={this.state.params.region}
                     selectedPoint={this.state.params.selectedPoint}
                     resultParams={this.state.resultParams}
                     climateGeojson={this.state.climateGeojson}

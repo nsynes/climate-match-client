@@ -18,7 +18,7 @@ class Outputs extends React.Component {
 
     handleDisplayChange = (e) => {
         const { display } = this.state;
-        const displayUpdate = display === 'cd' ? 'rank' : 'cd';
+        const displayUpdate = display === 'rank' ? 'cd' : display === 'cd' ? 'cdZero' : 'rank';
         this.setState({ display: displayUpdate });
     }
     

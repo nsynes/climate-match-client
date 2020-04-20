@@ -17,9 +17,10 @@ const Map = (props) => {
     }
 
     var setStyle = (feature) => {
-        const fraction = props.display === 'rank' ?
-            (feature.properties.n) / (props.resultParams.nSites) :
-            (feature.properties.cd - props.resultParams.minCD) / (props.resultParams.maxCD - props.resultParams.minCD);
+        var fraction;
+        if ( props.display === 'rank' )  fraction = (feature.properties.n) / (props.resultParams.nSites);
+        else if ( props.display === 'cd' ) fraction = (feature.properties.cd - props.resultParams.minCD) / (props.resultParams.maxCD - props.resultParams.minCD);
+        else fraction = (feature.properties.cd) / (props.resultParams.maxCD);
         const colour = getColorFromFraction(fraction, props.colour)
         
         const geojsonMarkerOptions = {

@@ -35,7 +35,7 @@ const Parameters = (props) => {
                 handleCalculate={props.handleCalculate}
                 handleRefresh={props.handleRefresh} />
         )
-    } else if ( props.mode === 'Basic (old)' ) {
+    } else if ( props.mode === 'Basic (old version)' ) {
         return (
             <ParametersBasicOld
                 loading={props.loading}

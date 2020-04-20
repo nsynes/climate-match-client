@@ -88,13 +88,20 @@ class App extends React.Component {
     handleRefresh = (e) => {
         e.preventDefault();
 
-        window.location.reload();
+        const { params } = this.state;
+        params.selectedPoint = null;
+
+        this.setState({
+            climateGeojson: '',
+            warningMessage: '',
+            resultParams: {},
+            params: params
+        })
+        //window.location.reload();
     }
 
     handleCalculate = (e) => {
         e.preventDefault();
-        
-        console.log('fetch...', this.state.params)
 
         const { params } = this.state;
         var nParams = 0, nParamsSet = 0;

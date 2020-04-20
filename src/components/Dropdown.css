@@ -1,7 +1,11 @@
-.dropbox-container.label-above {
+.parameter-container {
+    position: relative;
+    display: inline-block;
+}
+.parameter-container.label-above {
     padding: 0 1em 1em 1em;
 }
-.dropbox-container.label-left {
+.parameter-container.label-left {
     display: flex;
     justify-content: center;
     padding-bottom: 1em;

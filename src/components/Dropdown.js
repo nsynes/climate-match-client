@@ -1,10 +1,11 @@
 import React from 'react';
+import Tooltip from './Tooltip';
 import './Dropdown.css';
 
 const Dropdown = (props) => {
 
 
-    const { initialValue, listOptions, name, varName, leftLabel, groups } = props;
+    const { initialValue, listOptions, name, varName, leftLabel, groups, toolTipText } = props;
 
     var options = [];
     if ( !groups ) {
@@ -22,14 +23,15 @@ const Dropdown = (props) => {
     }
 
     return (
-        <div className={`dropbox-container label-${leftLabel ? 'left' : 'above'}`}>
-            <label className={`label-${leftLabel ? 'left' : ''}`}>
+        <div className={`parameter-container label-${leftLabel ? 'left' : 'above'}`}>
+            <label className={`label-${leftLabel ? 'left' : 'above'}`}>
                 {name}
             </label>
-                <select className='dropdown' defaultValue={initialValue} onChange={(e) => props.handleChange(e.target.value, varName)}>
-                    <option value="" disabled hidden>Please select...</option>
-                    {options}
-                </select>
+            <select className='dropdown' defaultValue={initialValue} onChange={(e) => props.handleChange(e.target.value, varName)}>
+                <option value="" disabled hidden>Please select...</option>
+                {options}
+            </select>
+            <Tooltip text={toolTipText} />
         </div>
     );
 }

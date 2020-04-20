@@ -1,0 +1,33 @@
+.tooltiptext {
+    visibility: hidden;
+    width: 90%;
+    min-width: 300px;
+    background-color: rgba(85,85,85,0.95);
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 1em;
+    margin-left: 0px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+/* Tooltip arrow */
+.tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 10%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+/* Show the tooltip text when you mouse over the parameter container */
+.parameter-container:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}

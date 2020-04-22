@@ -6,6 +6,7 @@ import { URL_Map_Tiles } from '../config';
 import './Map.css';
 import Europe from '../data/Europe.json';
 import PNW from '../data/PNW.json';
+import EuropeAndPNW from '../data/EuropeAndPNW.json';
 import { getColorFromFraction } from '../helpers';
 
 const Map = (props) => {
@@ -89,6 +90,11 @@ const Map = (props) => {
                 { props.region === 'PNW' &&
                     <GeoJSON
                         data={PNW}
+                        style={regionStyle}>
+                    </GeoJSON> }
+                { props.region === 'EuropeAndPNW' &&
+                    <GeoJSON
+                        data={EuropeAndPNW}
                         style={regionStyle}>
                     </GeoJSON> }
             </LeafletMap>

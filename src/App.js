@@ -3,7 +3,7 @@ import HelmetTags from './components/HelmetTags';
 import Outputs from './components/Outputs';
 import Inputs from './components/Inputs';
 import Loading from './components/Loading';
-import { API_URL_ClimateMatch, paramDefaults } from './config';
+import { API_URL_ClimateMatch, stateDefaults } from './config';//, stateTestResults } from './config';
 import { handleResponse } from './helpers';
 
 
@@ -11,30 +11,13 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            loading: false,
-            climateGeojson: '',
-            cellHalfWidth: null,
-            mode: 'Basic',
-            params: {
-                selectedPoint: paramDefaults.selectedPoint,
-                localClimate: paramDefaults.localClimate,
-                searchClimate: paramDefaults.searchClimate,
-                monthsType: paramDefaults.monthsType,
-                months: paramDefaults.months,
-                cdVar: paramDefaults.cdVar,
-                nSites: paramDefaults.nSites,
-                region: paramDefaults.region
-            },
-            warningMessage: '',
-            resultParams: {}
-        };
+        this.state = stateDefaults//stateTestResults
     }
 
     resetDefaults = () => {
         var { params } = this.state;
-        params.nSites = paramDefaults.nSites;
-        params.region = paramDefaults.region;
+        params.nSites = stateDefaults.params.nSites;
+        params.region = stateDefaults.params.region;
         this.setState({
             params: params
         });
@@ -54,6 +37,7 @@ class App extends React.Component {
         if ( !this.state.loading && this.state.climateGeojson === '' ) {
             var { params } = this.state;
             params.selectedPoint = e.latlng;
+            console.log(e.latlng)
             this.setState({
                 params: params
             });
@@ -149,6 +133,7 @@ class App extends React.Component {
         .then(handleResponse)
         .then((geojson) => {
             if ( geojson ) {
+                console.log('geojson', JSON.stringify(geojson))
                 const minCD = Math.min.apply(Math, geojson.features.map(function(o) { return o.properties.cd; }))
                 const maxCD = Math.max.apply(Math, geojson.features.map(function(o) { return o.properties.cd; }))
                 const resultParams = {

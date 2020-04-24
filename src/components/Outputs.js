@@ -40,6 +40,7 @@ class Outputs extends React.Component {
                     display={this.state.display}
                     colour={this.state.colour}
                     resultParams={this.props.resultParams}
+                    climateGeojson={this.props.climateGeojson}
                     handleColourChange={this.handleColourChange}
                     handleDisplayChange={this.handleDisplayChange} />
                 <Map

@@ -16,8 +16,6 @@ export const listRegions = [{Europe: 'Europe'}, {PNW: 'Pacific NW'}, {EuropeAndP
 export const listModes = ['Basic','Basic (old version)', 'Advanced'];
 
 
-
-
 export const stateDefaults = 
 {
     loading: false,
@@ -56,6 +54,7 @@ export const stateTestResults =
     },
     resultParams: {
         selectedPoint: {lat: 51.516198091721684, lng: -0.17578125},
+        region: 'Europe',
         localClimate: '1981-2010',
         searchClimate: '2041-2070',
         monthsType: 'All',

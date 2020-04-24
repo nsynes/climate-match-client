@@ -3,6 +3,7 @@ import Legend from './Legend';
 import SummaryText from './SummaryText';
 import ResultToggle from './ResultToggle';
 import ResultParameters from './ResultParameters';
+import ResultHistogram from './ResultHistogram';
 import './ResultSummary.css';
 
 class ResultSummary extends React.Component {
@@ -48,6 +49,13 @@ class ResultSummary extends React.Component {
                             </div>
                             <ResultParameters
                                 resultParams={this.props.resultParams} />
+                            <ResultHistogram
+                                display={this.props.display}
+                                colour={this.props.colour}
+                                nSites={this.props.resultParams.nSites}
+                                minCD={this.props.resultParams.minCD}
+                                maxCD={this.props.resultParams.maxCD}
+                                climateGeojson={this.props.climateGeojson} />
                         </div>
                     }
                 </div>

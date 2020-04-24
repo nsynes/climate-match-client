@@ -3,7 +3,7 @@ import HelmetTags from './components/HelmetTags';
 import Outputs from './components/Outputs';
 import Inputs from './components/Inputs';
 import Loading from './components/Loading';
-import { API_URL_ClimateMatch, stateDefaults } from './config';//, stateTestResults } from './config';
+import { API_URL_ClimateMatch, stateDefaults, stateTestResults } from './config';
 import { handleResponse } from './helpers';
 
 
@@ -11,7 +11,7 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = stateDefaults//stateTestResults
+        this.state = stateTestResults;//stateDefaults;
     }
 
     resetDefaults = () => {
@@ -37,7 +37,6 @@ class App extends React.Component {
         if ( !this.state.loading && this.state.climateGeojson === '' ) {
             var { params } = this.state;
             params.selectedPoint = e.latlng;
-            console.log(e.latlng)
             this.setState({
                 params: params
             });
@@ -133,10 +132,10 @@ class App extends React.Component {
         .then(handleResponse)
         .then((geojson) => {
             if ( geojson ) {
-                console.log('geojson', JSON.stringify(geojson))
                 const minCD = Math.min.apply(Math, geojson.features.map(function(o) { return o.properties.cd; }))
                 const maxCD = Math.max.apply(Math, geojson.features.map(function(o) { return o.properties.cd; }))
                 const resultParams = {
+                    region: region,
                     selectedPoint: selectedPoint,
                     localClimate: localClimate,
                     searchClimate: searchClimate,

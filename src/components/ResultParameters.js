@@ -1,13 +1,14 @@
 import React from 'react';
 import './ResultParameters.css';
-import { listMonths, cdVarNames } from '../config';
+import { listMonths, cdVarNames, listRegions } from '../config';
 
 const ResultParameters = (props) => {
 
-    const { selectedPoint, localClimate, searchClimate, months, cdVar } = props.resultParams;
+    const { region, selectedPoint, localClimate, searchClimate, months, cdVar } = props.resultParams;
     const { lat, lng } = selectedPoint;
     const monthsText = months.map((m) => listMonths[m-1]).join(', ');
     const cdVarName = cdVarNames.find((varObj) => varObj[cdVar])[cdVar];
+    const regionText = listRegions.find((varObj) => varObj[region])[region];
 
     return (
         <table>
@@ -19,6 +20,10 @@ const ResultParameters = (props) => {
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <th>Study region</th>
+                    <td>{regionText}</td>
+                </tr>
                 <tr>
                     <th>Climate difference variables</th>
                     <td>{cdVarName}</td>

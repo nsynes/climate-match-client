@@ -32,6 +32,7 @@ export const stateDefaults =
         nSites: 5000,
         region: 'Europe'
     },
+    selectedCell: {},
     resultParams: {},
     warningMessage: ''
 };
@@ -52,6 +53,7 @@ export const stateTestResults =
         nSites: 1000,
         region: 'Europe'
     },
+    selectedCell: {},
     resultParams: {
         selectedPoint: {lat: 51.516198091721684, lng: -0.17578125},
         region: 'Europe',

@@ -77,6 +77,7 @@ class App extends React.Component {
         this.setState({
             climateGeojson: '',
             warningMessage: '',
+            selectedCell: {},
             resultParams: {},
             params: params
         })
@@ -115,12 +116,28 @@ class App extends React.Component {
         }
     }
 
+    handleGeojsonClick = (e) => {
+        /*
+            {props.selectedCellN &&
+                <GeoJSON
+                    data>
+                </GeoJSON>}
+        */
+        var selectedCell = {
+            n: e.layer.feature.properties.n,
+            cd: e.layer.feature.properties.cd,
+            coordinates: e.layer.feature.geometry.coordinates
+        }
+        this.setState({selectedCell})
+    }
+
     fetchClimateMatch = () => {
 
         this.setState({
             climateGeojson: '',
             loading: true,
             warningMessage: '',
+            selectedCell: {},
             resultParams: {}
         })
 
@@ -184,7 +201,9 @@ class App extends React.Component {
                     resultParams={this.state.resultParams}
                     climateGeojson={this.state.climateGeojson}
                     cellHalfWidth={this.state.cellHalfWidth}
+                    selectedCell={this.state.selectedCell}
                     warningMessage={this.state.warningMessage}
+                    handleGeojsonClick={this.handleGeojsonClick}
                     handleMapClick={this.handleMapClick} />
                 <Inputs
                     loading={this.state.loading}

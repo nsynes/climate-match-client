@@ -35,7 +35,7 @@ class ParametersBasic extends React.Component {
     render () {
 
         const years = [futureYears10, futureYears30];
-        const questions = [{currentSearch:'What climate will my location have in the future?'}, {currentLocal:'Which areas will have my current climate in the future?'}];
+        const questions = [{currentSearch:'Which areas currently have my future climate?'}, {currentLocal:'Which areas will have my current climate in the future?'}];
 
         const { cdVar } = this.props;
 

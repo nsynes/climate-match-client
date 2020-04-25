@@ -1,56 +1,13 @@
 import React from 'react';
-import { Map as LeafletMap, TileLayer, Marker, GeoJSON, ZoomControl } from 'react-leaflet';
-import L from 'leaflet';
+import { Map as LeafletMap, TileLayer, Marker, ZoomControl } from 'react-leaflet';
+import SelectedClimateGeoJSON from './SelectedClimateGeoJSON';
+import ClimateGeoJSON from './ClimateGeoJSON';
+import RegionGeoJSON from './RegionGeoJSON';
 import {  IconTree  } from './IconTree';
 import { URL_Map_Tiles } from '../config';
 import './Map.css';
-import Europe from '../data/Europe.json';
-import PNW from '../data/PNW.json';
-import EuropeAndPNW from '../data/EuropeAndPNW.json';
-import { getColorFromFraction } from '../helpers';
 
 const Map = (props) => {
-
-    var onEachFeature = (feature, layer) => {
-        if (feature.properties && feature.properties.cd && feature.properties.n) {
-            layer.bindPopup(`<b>Rank</b>: ${feature.properties.n} of ${props.resultParams.nSites}<br /><b>CD</b>: ${feature.properties.cd}`);
-        }
-    }
-
-    var setStyle = (feature) => {
-        var fraction;
-        if ( props.display === 'rank' )  fraction = (feature.properties.n) / (props.resultParams.nSites);
-        else if ( props.display === 'cd' ) fraction = (feature.properties.cd - props.resultParams.minCD) / (props.resultParams.maxCD - props.resultParams.minCD);
-        else fraction = (feature.properties.cd) / (props.resultParams.maxCD);
-        const colour = getColorFromFraction(fraction, props.colour)
-        
-        const geojsonMarkerOptions = {
-            fillColor: colour,
-            color: colour,
-            weight: 1,
-            opacity: 0.8,
-            fillOpacity: 0.8
-        };
-
-        const latlng = {
-            lng: feature.geometry.coordinates[0],
-            lat: feature.geometry.coordinates[1]
-        }
-        const bounds = [[latlng.lat-props.cellHalfWidth, latlng.lng-props.cellHalfWidth], [latlng.lat+props.cellHalfWidth, latlng.lng+props.cellHalfWidth]];
-        return L.rectangle(bounds, geojsonMarkerOptions)
-    };
-
-    var regionStyle = (feature) => {
-        return {
-            fillOpacity: 0.2,
-            fillColor: '#A9A9A9',
-            color: '#000000',
-            stroke: true,
-            weight: 0.8,
-            opacity: 1,
-            dashArray: '5,5'
-        };
-    }
 
     return (
         <div>
@@ -72,31 +29,20 @@ const Map = (props) => {
                 <TileLayer
                     url={URL_Map_Tiles}
                 />
-                { props.selectedPoint && <Marker position={props.selectedPoint} icon={IconTree} draggable={false}>
-                </Marker> }
-                {props.climateGeojson ?
-                    <GeoJSON
-                        key={`climate-by-${props.display}-${props.colour}`}
-                        data={props.climateGeojson}
-                        pointToLayer={setStyle}
-                        onEachFeature={onEachFeature}>
-                    </GeoJSON> :
-                    null}
-                { props.region === 'Europe' &&
-                    <GeoJSON
-                        data={Europe}
-                        style={regionStyle}>
-                    </GeoJSON> }
-                { props.region === 'PNW' &&
-                    <GeoJSON
-                        data={PNW}
-                        style={regionStyle}>
-                    </GeoJSON> }
-                { props.region === 'EuropeAndPNW' &&
-                    <GeoJSON
-                        data={EuropeAndPNW}
-                        style={regionStyle}>
-                    </GeoJSON> }
+                { props.selectedPoint &&
+                <Marker position={props.selectedPoint} icon={IconTree} draggable={false} />}
+                <SelectedClimateGeoJSON
+                    selectedCell={props.selectedCell}
+                    cellHalfWidth={props.cellHalfWidth} />
+                <ClimateGeoJSON
+                    display={props.display}
+                    colour={props.colour}
+                    resultParams={props.resultParams}
+                    climateGeojson={props.climateGeojson}
+                    cellHalfWidth={props.cellHalfWidth}
+                    handleGeojsonClick={props.handleGeojsonClick} />
+                <RegionGeoJSON
+                    region={props.region}/>
             </LeafletMap>
         </div>
     );

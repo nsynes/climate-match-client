@@ -55,6 +55,7 @@ class ResultSummary extends React.Component {
                                 nSites={this.props.resultParams.nSites}
                                 minCD={this.props.resultParams.minCD}
                                 maxCD={this.props.resultParams.maxCD}
+                                selectedCellCD={this.props.selectedCell.cd}
                                 climateGeojson={this.props.climateGeojson} />
                         </div>
                     }

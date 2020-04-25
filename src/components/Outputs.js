@@ -40,18 +40,22 @@ class Outputs extends React.Component {
                     display={this.state.display}
                     colour={this.state.colour}
                     resultParams={this.props.resultParams}
+                    selectedPoint={this.props.selectedPoint}
                     climateGeojson={this.props.climateGeojson}
+                    selectedCell={this.props.selectedCell}
                     handleColourChange={this.handleColourChange}
-                    handleDisplayChange={this.handleDisplayChange} />
+                    handleDisplayChange={this.handleDisplayChange}/>
                 <Map
                     display={this.state.display}
                     colour={this.state.colour}
                     resultParams={this.props.resultParams}
                     region={this.props.region}
                     selectedPoint={this.props.selectedPoint}
-                    handleMapClick={this.props.handleMapClick} 
                     climateGeojson={this.props.climateGeojson}
-                    cellHalfWidth={this.props.cellHalfWidth} />
+                    cellHalfWidth={this.props.cellHalfWidth}
+                    selectedCell={this.props.selectedCell}
+                    handleMapClick={this.props.handleMapClick} 
+                    handleGeojsonClick={this.props.handleGeojsonClick}  />
                 <WarningBanner warningMessage={this.props.warningMessage} />
             </div>
         );

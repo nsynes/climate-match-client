@@ -9,6 +9,7 @@ const Inputs = (props) => {
     return (
         <div className='inputs-container'>
             <Title />
+            <div className='link' style={{textAlign: 'center'}} onClick={props.handleShowLatitude}>Show latitude lines</div><br/>
             <ModeSelector
                 mode={props.mode}
                 handleModeChange={props.handleModeChange} />

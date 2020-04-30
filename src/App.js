@@ -2,6 +2,7 @@ import React from 'react';
 import HelmetTags from './components/HelmetTags';
 import Outputs from './components/Outputs';
 import Inputs from './components/Inputs';
+import Logos from './components/Logos';
 import Loading from './components/Loading';
 import { API_URL_ClimateMatch, stateDefaults, stateTestResults } from './config';
 import { handleResponse, getHistogramData } from './helpers';
@@ -11,7 +12,7 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = stateTestResults;//stateDefaults
+        this.state = stateDefaults;//stateTestResults
     }
 
     resetDefaults = () => {
@@ -33,7 +34,18 @@ class App extends React.Component {
         })
     }
 
+    handleColourChange = (e) => {
+        const { colour } = this.state;
+        const colourUpdate = colour === 'red' ?
+            'green' :
+            colour === 'green' ?
+            'grey' :
+            'red';
+        this.setState({ colour: colourUpdate });
+    }
+
     handleMapClick = (e) => {
+        this.setState({ selectedCell: {} });
         if ( !this.state.loading && this.state.climateGeojson === '' ) {
             var { params } = this.state;
             params.selectedPoint = e.latlng;
@@ -41,6 +53,20 @@ class App extends React.Component {
                 params: params
             });
         }
+    }
+
+    handleGeojsonClick = (e) => {
+        var selectedCell = {
+            n: e.layer.feature.properties.n,
+            cd: e.layer.feature.properties.cd,
+            coordinates: e.layer.feature.geometry.coordinates
+        }
+        this.setState({selectedCell})
+    }
+
+    handleShowLatitude = () => {
+        const { showLatitude } = this.state;
+        this.setState({ showLatitude: !showLatitude })
     }
 
     handleDropdownChange = (value, name) => {
@@ -126,7 +152,8 @@ class App extends React.Component {
             climateGeojson: '',
             loading: true,
             warningMessage: '',
-            resultParams: {}
+            resultParams: {},
+            selectedCell: {}
         })
 
         var { selectedPoint, localClimate, searchClimate, months, cdVar, nSites, region } = this.state.params;
@@ -188,29 +215,35 @@ class App extends React.Component {
                     width='48px'
                     height='48px'/> }
                 <Outputs
+                    showLatitude={this.state.showLatitude}
+                    colour={this.state.colour}
                     region={params.region}
                     selectedPoint={params.selectedPoint}
                     resultParams={resultParams}
                     climateGeojson={climateGeojson}
+                    selectedCell={this.state.selectedCell}
                     display={display}
                     histData={histData}
                     cellHalfWidth={cellHalfWidth}
                     warningMessage={warningMessage}
+                    handleGeojsonClick={this.handleGeojsonClick} 
+                    handleColourChange={this.handleColourChange}
                     handleMapClick={this.handleMapClick}
                     handleDisplayChange={this.handleDisplayChange} />
                 <Inputs
                     loading={loading}
                     mode={mode}
                     params={params}
+                    handleShowLatitude={this.handleShowLatitude}
                     handleModeChange={this.handleModeChange}
                     handleDropdownChange={this.handleDropdownChange}
                     handleCheckboxChange={this.handleCheckboxChange}
                     handleCalculate={this.handleCalculate}
                     handleRefresh={this.handleRefresh} />
+                <Logos />
           </div>
         );
     }
 }
-
 
 export default App;

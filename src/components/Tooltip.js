@@ -5,7 +5,7 @@ const Tooltip = (props) => {
 
     if ( props.text ) {
         return (
-            <span className="tooltiptext">{props.text}</span>
+            <span className='tooltiptext'>{props.text}</span>
         );
     } else {
         return null;

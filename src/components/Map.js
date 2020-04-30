@@ -44,7 +44,8 @@ const Map = (props) => {
                     handleGeojsonClick={props.handleGeojsonClick} />
                 <RegionGeoJSON
                     region={props.region}/>
-                <LatitudeLinesGeoJSON />
+                {props.showLatitude &&
+                <LatitudeLinesGeoJSON />}
             </LeafletMap>
         </div>
     );

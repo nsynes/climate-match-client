@@ -1,0 +1,18 @@
+.logo-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+@media all and (min-width: 801px) {
+    .logo-container {
+        padding: 0 2em;
+        justify-content: space-between;
+    }
+}
+@media all and (max-width: 800px) {
+    .logo-container {
+        justify-content: center;
+    }
+}

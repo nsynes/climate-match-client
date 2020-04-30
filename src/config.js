@@ -15,7 +15,6 @@ export const listnSites = [{200: 'Low'},{1000: 'Medium'},{5000: 'High'}];
 export const listRegions = [{Europe: 'Europe'}, {PNW: 'Pacific NW'}, {EuropeAndPNW: 'Europe and Pacific NW'}];
 export const listModes = ['Basic','Advanced'];
 
-
 export const stateDefaults = 
 {
     loading: false,
@@ -23,6 +22,9 @@ export const stateDefaults =
     cellHalfWidth: null,
     mode: 'Basic',
     display: 'cd',
+    colour: 'red',
+    selectedCell: {},
+    showLatitude: false,
     params: {
         selectedPoint: null,
         localClimate: '',
@@ -44,6 +46,9 @@ export const stateTestResults =
     cellHalfWidth: 0.09999999999999999167 / 2,
     mode: 'Advanced',
     display: 'cd',
+    colour: 'red',
+    selectedCell: {},
+    showLatitude: false,
     params: {
         selectedPoint: {lat: 51.516198091721684, lng: -0.17578125},
         localClimate: '1981-2010',

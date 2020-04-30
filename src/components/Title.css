@@ -1,22 +1,6 @@
-.title-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-bottom: 1em;
-}
 h1 {
+    width: 100%;
     margin-top: .25em;
-    display: inline-block;
     text-align: center;
     margin-right: 1em;
-}
-@media all and (min-width: 801px) {
-    .title-container {
-        justify-content: space-between;
-    }
-}
-@media all and (max-width: 800px) {
-    .title-container {
-        justify-content: center;
-    }
 }

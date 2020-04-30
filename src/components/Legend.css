@@ -5,7 +5,7 @@
     border: 1px solid rgb(200,200,200);
     border-radius: 5px;
     padding: 0 0.25em;
-    min-width: 9em;
+    min-width: 10em;
 }
 .legend {
     display: flex;
@@ -16,7 +16,7 @@
     height: 50px;
 }
 .legend-colors.red {
-    background-image: linear-gradient(red, yellow);
+    background-image: linear-gradient(rgb(255,0,0), rgb(255,255,0));
 }
 .legend-colors.green {
     background-image: linear-gradient(rgb(0,40,0), rgb(0,255,100));
@@ -40,11 +40,4 @@
     text-align: center;
     font-size: 0.8em;
     margin: 0.25em 0;
-}
-.link {
-    color: blue;
-}
-.legend-toggle .link:hover {
-    text-decoration: underline;
-    cursor: pointer;
 }

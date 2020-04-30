@@ -17,29 +17,16 @@ const RegionGeoJSON = (props) => {
             dashArray: '5,5'
         };
     }
+    const { region } = props;
+    const data = region === 'PNW' ? PNW : region === 'EuropeAndPNW' ? EuropeAndPNW : Europe;
 
-    if ( props.region === 'PNW' ) {
-        return (
-            <GeoJSON
-                data={PNW}
-                style={regionStyle}>
-            </GeoJSON>
-        )
-    } else if ( props.region === 'EuropeAndPNW' ) {
-        return (
-            <GeoJSON
-                data={EuropeAndPNW}
-                style={regionStyle}>
-            </GeoJSON>
-        )
-    } else {
-        return (
-            <GeoJSON
-                data={Europe}
-                style={regionStyle}>
-            </GeoJSON>
-        )
-    }
+    return (
+        <GeoJSON
+            key={region}
+            data={data}
+            style={regionStyle}>
+        </GeoJSON>
+    )
 }
 
 export default RegionGeoJSON;

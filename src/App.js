@@ -4,14 +4,14 @@ import Outputs from './components/Outputs';
 import Inputs from './components/Inputs';
 import Loading from './components/Loading';
 import { API_URL_ClimateMatch, stateDefaults, stateTestResults } from './config';
-import { handleResponse } from './helpers';
+import { handleResponse, getHistogramData } from './helpers';
 
 
 class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = stateTestResults;//stateDefaults;
+        this.state = stateTestResults;//stateDefaults
     }
 
     resetDefaults = () => {
@@ -68,6 +68,12 @@ class App extends React.Component {
         });
     }
 
+    handleDisplayChange = (e) => {
+        const { display } = this.state;
+        const displayUpdate = display === 'rank' ? 'cd' : 'rank';
+        this.setState({ display: displayUpdate });
+    }
+
     handleRefresh = (e) => {
         e.preventDefault();
 
@@ -77,11 +83,9 @@ class App extends React.Component {
         this.setState({
             climateGeojson: '',
             warningMessage: '',
-            selectedCell: {},
             resultParams: {},
             params: params
         })
-        //window.location.reload();
     }
 
     handleCalculate = (e) => {
@@ -116,28 +120,12 @@ class App extends React.Component {
         }
     }
 
-    handleGeojsonClick = (e) => {
-        /*
-            {props.selectedCellN &&
-                <GeoJSON
-                    data>
-                </GeoJSON>}
-        */
-        var selectedCell = {
-            n: e.layer.feature.properties.n,
-            cd: e.layer.feature.properties.cd,
-            coordinates: e.layer.feature.geometry.coordinates
-        }
-        this.setState({selectedCell})
-    }
-
     fetchClimateMatch = () => {
 
         this.setState({
             climateGeojson: '',
             loading: true,
             warningMessage: '',
-            selectedCell: {},
             resultParams: {}
         })
 
@@ -189,26 +177,31 @@ class App extends React.Component {
     }
 
     render() {
+
+        const { loading, params, climateGeojson, resultParams, mode, display, cellHalfWidth, warningMessage } = this.state;
+        const histData = climateGeojson ? getHistogramData(climateGeojson, resultParams.minCD, resultParams.maxCD, resultParams.nSites, display, 20) : null;
+        
         return (
             <div>
                 <HelmetTags />
-                { this.state.loading && <Loading
+                { loading && <Loading
                     width='48px'
                     height='48px'/> }
                 <Outputs
-                    region={this.state.params.region}
-                    selectedPoint={this.state.params.selectedPoint}
-                    resultParams={this.state.resultParams}
-                    climateGeojson={this.state.climateGeojson}
-                    cellHalfWidth={this.state.cellHalfWidth}
-                    selectedCell={this.state.selectedCell}
-                    warningMessage={this.state.warningMessage}
-                    handleGeojsonClick={this.handleGeojsonClick}
-                    handleMapClick={this.handleMapClick} />
+                    region={params.region}
+                    selectedPoint={params.selectedPoint}
+                    resultParams={resultParams}
+                    climateGeojson={climateGeojson}
+                    display={display}
+                    histData={histData}
+                    cellHalfWidth={cellHalfWidth}
+                    warningMessage={warningMessage}
+                    handleMapClick={this.handleMapClick}
+                    handleDisplayChange={this.handleDisplayChange} />
                 <Inputs
-                    loading={this.state.loading}
-                    mode={this.state.mode}
-                    params={this.state.params}
+                    loading={loading}
+                    mode={mode}
+                    params={params}
                     handleModeChange={this.handleModeChange}
                     handleDropdownChange={this.handleDropdownChange}
                     handleCheckboxChange={this.handleCheckboxChange}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Map as LeafletMap, TileLayer, Marker, ZoomControl } from 'react-leaflet';
+import LatitudeLinesGeoJSON from './LatitudeLinesGeoJSON';
 import SelectedClimateGeoJSON from './SelectedClimateGeoJSON';
 import ClimateGeoJSON from './ClimateGeoJSON';
 import RegionGeoJSON from './RegionGeoJSON';
@@ -16,6 +17,7 @@ const Map = (props) => {
                 style={{height: 1000}}
                 center={[50, 10]}
                 zoom={4}
+                minZoom={2}
                 maxZoom={19}
                 attributionControl={true}
                 doubleClickZoom={true}
@@ -27,8 +29,7 @@ const Map = (props) => {
                 onClick={props.handleMapClick}>
                 <ZoomControl position='bottomright' />
                 <TileLayer
-                    url={URL_Map_Tiles}
-                />
+                    url={URL_Map_Tiles} />
                 { props.selectedPoint &&
                 <Marker position={props.selectedPoint} icon={IconTree} draggable={false} />}
                 <SelectedClimateGeoJSON
@@ -43,6 +44,7 @@ const Map = (props) => {
                     handleGeojsonClick={props.handleGeojsonClick} />
                 <RegionGeoJSON
                     region={props.region}/>
+                <LatitudeLinesGeoJSON />
             </LeafletMap>
         </div>
     );

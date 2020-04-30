@@ -22,11 +22,13 @@ class ParametersBasic extends React.Component {
         } else if ( name === 'climate' ) {
             climate = value;
         }
+        const [start, end] = climate.split('-').map((x) => parseInt(x));
+        const currentClimate = end-start <= 10 ? '2001-2010' : '1981-2010';
         if ( question === 'currentSearch' ) {
-            this.props.handleDropdownChange('1981-2010','searchClimate');
+            this.props.handleDropdownChange(currentClimate,'searchClimate');
             this.props.handleDropdownChange(climate,'localClimate');
         } else if ( question === 'currentLocal' ) {
-            this.props.handleDropdownChange('1981-2010','localClimate');
+            this.props.handleDropdownChange(currentClimate,'localClimate');
             this.props.handleDropdownChange(climate,'searchClimate');             
         }
         this.setState({ question, climate })

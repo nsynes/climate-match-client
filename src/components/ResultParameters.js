@@ -1,10 +1,11 @@
 import React from 'react';
 import './ResultParameters.css';
 import { listMonths, cdVarNames, listRegions } from '../config';
+import { displayCommas } from '../helpers';
 
 const ResultParameters = (props) => {
 
-    const { region, selectedPoint, localClimate, searchClimate, months, cdVar } = props.resultParams;
+    const { region, selectedPoint, localClimate, searchClimate, months, cdVar, nSites } = props.resultParams;
     const { lat, lng } = selectedPoint;
     const monthsText = months.map((m) => listMonths[m-1]).join(', ');
     const cdVarName = cdVarNames.find((varObj) => varObj[cdVar])[cdVar];
@@ -43,6 +44,10 @@ const ResultParameters = (props) => {
                 <tr>
                     <th>Months matched</th>
                     <td>{monthsText}</td>
+                </tr>
+                <tr>
+                    <th>Number of matches requested</th>
+                    <td>{displayCommas(nSites)}</td>
                 </tr>
             </tbody>
         </table>

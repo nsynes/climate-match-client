@@ -6,20 +6,28 @@ import WarningBanner from './WarningBanner';
 import './Outputs.css';
 
 
-class Outputs extends React.Component {
+class Outputs extends React.PureComponent {
 
     constructor(props) {
         super(props);
         this.state = {
-            display: 'cd',
-            colour: 'red'
+            colour: 'red',
+            selectedCell: {}
         }
     }
 
-    handleDisplayChange = (e) => {
-        const { display } = this.state;
-        const displayUpdate = display === 'rank' ? 'cd' : display === 'cd' ? 'cdZero' : 'rank';
-        this.setState({ display: displayUpdate });
+    handleCheckMapClick = (e) => {
+        this.setState({ selectedCell: {} });
+        this.props.handleMapClick(e)
+    }
+
+    handleGeojsonClick = (e) => {
+        var selectedCell = {
+            n: e.layer.feature.properties.n,
+            cd: e.layer.feature.properties.cd,
+            coordinates: e.layer.feature.geometry.coordinates
+        }
+        this.setState({selectedCell})
     }
     
     handleColourChange = (e) => {
@@ -33,29 +41,29 @@ class Outputs extends React.Component {
     }
 
     render () {
+        
         return (
             <div className='output-container'>
                 <SidePanel />
                 <ResultSummary
-                    display={this.state.display}
+                    display={this.props.display}
                     colour={this.state.colour}
                     resultParams={this.props.resultParams}
-                    selectedPoint={this.props.selectedPoint}
-                    climateGeojson={this.props.climateGeojson}
-                    selectedCell={this.props.selectedCell}
+                    histData={this.props.histData}
+                    selectedCell={this.state.selectedCell}
                     handleColourChange={this.handleColourChange}
-                    handleDisplayChange={this.handleDisplayChange}/>
+                    handleDisplayChange={this.props.handleDisplayChange}/>
                 <Map
-                    display={this.state.display}
+                    display={this.props.display}
                     colour={this.state.colour}
                     resultParams={this.props.resultParams}
                     region={this.props.region}
                     selectedPoint={this.props.selectedPoint}
                     climateGeojson={this.props.climateGeojson}
                     cellHalfWidth={this.props.cellHalfWidth}
-                    selectedCell={this.props.selectedCell}
-                    handleMapClick={this.props.handleMapClick} 
-                    handleGeojsonClick={this.props.handleGeojsonClick}  />
+                    selectedCell={this.state.selectedCell}
+                    handleMapClick={this.handleCheckMapClick}
+                    handleGeojsonClick={this.handleGeojsonClick}  />
                 <WarningBanner warningMessage={this.props.warningMessage} />
             </div>
         );

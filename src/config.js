@@ -13,7 +13,7 @@ export const listMonthsTypes = ['All','Growing Season (Apr-Sep)','Specific Month
 export const cdVarNames = [{'full':'Precipitation, Temperature and Diurnal Range'},{'prec':'Precipitation'},{'temp':'Temperature and Diurnal Range'}]
 export const listnSites = [{200: 'Low'},{1000: 'Medium'},{5000: 'High'}];
 export const listRegions = [{Europe: 'Europe'}, {PNW: 'Pacific NW'}, {EuropeAndPNW: 'Europe and Pacific NW'}];
-export const listModes = ['Basic','Basic (old version)', 'Advanced'];
+export const listModes = ['Basic','Advanced'];
 
 
 export const stateDefaults = 
@@ -22,6 +22,7 @@ export const stateDefaults =
     climateGeojson: '',
     cellHalfWidth: null,
     mode: 'Basic',
+    display: 'cd',
     params: {
         selectedPoint: null,
         localClimate: '',
@@ -32,7 +33,6 @@ export const stateDefaults =
         nSites: 5000,
         region: 'Europe'
     },
-    selectedCell: {},
     resultParams: {},
     warningMessage: ''
 };
@@ -43,6 +43,7 @@ export const stateTestResults =
     climateGeojson: testClimateData,
     cellHalfWidth: 0.09999999999999999167 / 2,
     mode: 'Advanced',
+    display: 'cd',
     params: {
         selectedPoint: {lat: 51.516198091721684, lng: -0.17578125},
         localClimate: '1981-2010',
@@ -53,7 +54,6 @@ export const stateTestResults =
         nSites: 1000,
         region: 'Europe'
     },
-    selectedCell: {},
     resultParams: {
         selectedPoint: {lat: 51.516198091721684, lng: -0.17578125},
         region: 'Europe',

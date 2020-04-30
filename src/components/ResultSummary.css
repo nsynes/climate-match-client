@@ -40,6 +40,9 @@
     margin-bottom: 0.25em;
 }
 .summary-text {
+    margin: 0.25em 0;
+}
+.summary-graph {
     display: flex;
     flex-direction: row;
     margin: 0.25em 0;

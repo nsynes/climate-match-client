@@ -14,7 +14,7 @@ class ResultSummary extends React.Component {
             visible: true
         }
     }
-    
+
     handleToggleResults = () => {
         const visible = this.state.visible;
         this.setState({
@@ -37,7 +37,16 @@ class ResultSummary extends React.Component {
                         <div className='summary-content'>
                             <div className='summary-text'>
                                 <SummaryText
-                                    resultParams={this.props.resultParams} />                
+                                    resultParams={this.props.resultParams} />
+                            </div>
+                            <div className='summary-graph'>
+                                <ResultHistogram
+                                    histData={this.props.histData}
+                                    minCD={this.props.resultParams.minCD}
+                                    maxCD={this.props.resultParams.maxCD}
+                                    selectedCell={this.props.selectedCell}
+                                    colour={this.props.colour} />
+                                <div style={{padding: '0.5em'}}></div>
                                 <Legend
                                     display={this.props.display}
                                     colour={this.props.colour}
@@ -49,14 +58,6 @@ class ResultSummary extends React.Component {
                             </div>
                             <ResultParameters
                                 resultParams={this.props.resultParams} />
-                            <ResultHistogram
-                                display={this.props.display}
-                                colour={this.props.colour}
-                                nSites={this.props.resultParams.nSites}
-                                minCD={this.props.resultParams.minCD}
-                                maxCD={this.props.resultParams.maxCD}
-                                selectedCellCD={this.props.selectedCell.cd}
-                                climateGeojson={this.props.climateGeojson} />
                         </div>
                     }
                 </div>

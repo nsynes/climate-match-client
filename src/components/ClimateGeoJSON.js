@@ -13,18 +13,16 @@ const ClimateGeoJSON = (props) => {
 
     var setStyle = (feature) => {
 
-        var fraction;
-        if ( props.display === 'rank' )  fraction = (feature.properties.n) / (props.resultParams.nSites);
-        else if ( props.display === 'cd' ) fraction = (feature.properties.cd - props.resultParams.minCD) / (props.resultParams.maxCD - props.resultParams.minCD);
-        else fraction = (feature.properties.cd) / (props.resultParams.maxCD);
+        const fraction = props.display === 'rank' ? feature.properties.n / props.resultParams.nSites : feature.properties.cd / props.resultParams.maxCD;
         const colour = getColorFromFraction(fraction, props.colour)
         
         const geojsonMarkerOptions = {
             fillColor: colour,
-            color: colour,
-            weight: 1,
-            opacity: 0.8,
             fillOpacity: 0.8,
+            stroke: true,
+            color: colour,
+            weight: 0.5,
+            opacity: 0.8,
             pane: 'all'
         };
 
@@ -39,14 +37,14 @@ const ClimateGeoJSON = (props) => {
     if ( props.climateGeojson ) {
         return (
             <Pane name='all' >
-            <GeoJSON
-                key={`${props.display}-${props.colour}`}
-                data={props.climateGeojson}
-                pointToLayer={setStyle}
-                onEachFeature={onEachFeature}
-                onClick={props.handleGeojsonClick}>
-            </GeoJSON>
-        </Pane>
+                <GeoJSON
+                    key={`${props.display}-${props.colour}`}
+                    data={props.climateGeojson}
+                    pointToLayer={setStyle}
+                    onEachFeature={onEachFeature}
+                    onClick={props.handleGeojsonClick}>
+                </GeoJSON>
+            </Pane>
         )
     } else {
         return (null)

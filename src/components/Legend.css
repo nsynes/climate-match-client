@@ -2,10 +2,10 @@
     display: inline-flex;
     flex-direction: column;
     align-self: flex-start;
-    border: 1px solid rgb(100,100,100);
+    border: 1px solid rgb(200,200,200);
     border-radius: 5px;
     padding: 0 0.25em;
-    min-width: 8em;
+    min-width: 9em;
 }
 .legend {
     display: flex;
@@ -38,10 +38,13 @@
 }
 .legend-toggle {
     text-align: center;
-    color: blue;
     font-size: 0.8em;
+    margin: 0.25em 0;
 }
-.legend-toggle:hover {
+.link {
+    color: blue;
+}
+.legend-toggle .link:hover {
     text-decoration: underline;
     cursor: pointer;
 }

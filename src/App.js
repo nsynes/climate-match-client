@@ -4,7 +4,7 @@ import Outputs from './components/Outputs';
 import Inputs from './components/Inputs';
 import Logos from './components/Logos';
 import Loading from './components/Loading';
-import { API_URL_ClimateMatch, stateDefaults, stateTestResults } from './config';
+import { API_URL_ClimateMatch, API_URL_Nominatim_Reverse, stateDefaults, stateTestResults } from './config';
 import { handleResponse, getHistogramData } from './helpers';
 
 
@@ -12,7 +12,7 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = stateTestResults;//stateDefaults
+        this.state = stateDefaults;//stateTestResults
     }
 
     resetDefaults = () => {
@@ -49,9 +49,7 @@ class App extends React.Component {
         if ( !this.state.loading && this.state.climateGeojson === '' ) {
             var { params } = this.state;
             params.selectedPoint = e.latlng;
-            this.setState({
-                params: params
-            });
+            this.setState({ params: params });
         }
     }
 
@@ -61,7 +59,7 @@ class App extends React.Component {
             cd: e.layer.feature.properties.cd,
             coordinates: e.layer.feature.geometry.coordinates
         }
-        this.setState({selectedCell})
+        this.setState({ selectedCell })
     }
 
     handleShowLatitude = () => {
@@ -80,9 +78,11 @@ class App extends React.Component {
                 params['months'] = [false,false,false,true,true,true,true,true,true,false,false,false];
             }
         }
-        this.setState({
-            params: params
-        });
+        // Control different defaults for nSites depending on region
+        if ( name === 'region' ) {
+            params.nSites = value === 'EuropeAndPNW' ? 10000 : 5000;
+        }
+        this.setState({ params: params });
     }
 
     handleCheckboxChange = (e, name) => {
@@ -146,6 +146,14 @@ class App extends React.Component {
         }
     }
 
+    fetchLocationName = (selectedPoint) => {
+        fetch(`${API_URL_Nominatim_Reverse}?lat=${selectedPoint.lat}&lon=${selectedPoint.lng}&format=json`)
+        .then(handleResponse)
+        .then((json) => {
+            console.log(json)//suburb, city or county, country
+        })
+    }
+
     fetchClimateMatch = () => {
 
         this.setState({
@@ -157,6 +165,8 @@ class App extends React.Component {
         })
 
         var { selectedPoint, localClimate, searchClimate, months, cdVar, nSites, region } = this.state.params;
+
+        //this.fetchLocationName(selectedPoint);
 
         months = months.map((b, i) => b ? i+1 : null).filter((m) => m)
 
@@ -209,7 +219,7 @@ class App extends React.Component {
         const histData = climateGeojson ? getHistogramData(climateGeojson, resultParams.minCD, resultParams.maxCD, resultParams.nSites, display, 20) : null;
         
         return (
-            <div>
+            <div style={{width: '100%'}}>
                 <HelmetTags />
                 { loading && <Loading
                     width='48px'

@@ -1,0 +1,12 @@
+.fc-logo-container {
+    position: relative;
+    min-width: 268px;
+    min-height: 50px;
+    margin-right: 1em;
+}
+.fc-logo {
+    position: absolute;
+    left: 0;
+    width: 268px;
+    height: 50px;
+}

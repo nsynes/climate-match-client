@@ -2,6 +2,7 @@ import { testClimateData, testMinCD, testMaxCD } from './test-data';
 
 export const API_Domain = process.env.NODE_ENV === 'production' ? 'https://climate-api.nicksynes.com' : 'http://localhost:4001';
 export const API_URL_ClimateMatch = `${API_Domain}`;
+export const API_URL_Nominatim_Reverse = 'https://nominatim.openstreetmap.org/reverse';
 export const URL_Map_Tiles = process.env.NODE_ENV === 'production' ? 'https://{s}.tile.osm.org/{z}/{x}/{y}.png' : 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
 
 export const baselineYears10 = ['1981-1990','1991-2000','2001-2010','2011-2020'];
@@ -11,7 +12,8 @@ export const futureYears30 = ['2001-2030','2011-2040','2021-2050','2031-2060','2
 export const listMonths = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 export const listMonthsTypes = ['All','Growing Season (Apr-Sep)','Specific Months'];
 export const cdVarNames = [{'full':'Precipitation, Temperature and Diurnal Range'},{'prec':'Precipitation'},{'temp':'Temperature and Diurnal Range'}]
-export const listnSites = [{200: 'Low'},{1000: 'Medium'},{5000: 'High'}];
+export const listnSitesSmall = [{200: 'Low: 200'},{1000: 'Medium: 1,000'},{5000: 'High: 5,000'}];
+export const listnSitesLarge = [{200: 'Low: 200'},{1000: 'Medium: 1,000'},{5000: 'High: 5,000'},{10000: 'Very High: 10,000'}];
 export const listRegions = [{Europe: 'Europe'}, {PNW: 'Pacific NW'}, {EuropeAndPNW: 'Europe and Pacific NW'}];
 export const listModes = ['Basic','Advanced'];
 

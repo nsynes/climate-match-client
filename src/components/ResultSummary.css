@@ -14,13 +14,12 @@
 .result-summary.visible {
     width: 33%;
     min-width: 340px;
-    opacity: 0.5;
 }
 .result-summary.hidden {
     height: 1.5em;
     opacity: 0.5;
 }
-.result-summary:hover {
+.result-summary.hidden:hover {
     opacity: 1;
 }
 .summary-content {

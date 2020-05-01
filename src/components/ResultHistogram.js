@@ -8,11 +8,13 @@ const ResultHistogram = (props) => {
     const { histData, minCD, maxCD, selectedCell, colour } = props;
 
     
-    const colours = histData.colourFractions.map(fraction => getColorFromFraction(fraction, colour));
+    var colours = histData.colourFractions.map(fraction => getColorFromFraction(fraction, colour));
+    colours.push(colours[colours.length-1]) // duplicate final colour incase there is an extra bin
 
     return(
         <div style={{height: '200px', width: '100%', minWidth: '100px'}}>
             <Plot
+            onClick={(e) => console.log(e)}
             className={`plotly-graph`}
             data={[{
                 name: 'Frequency',

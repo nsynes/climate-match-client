@@ -11,7 +11,7 @@ const Inputs = (props) => {
             <Title />
             <div style={{textAlign: 'center', paddingBottom: '1em'}}>
                 <div className='link' style={{display:'inline-block'}} onClick={props.handleShowLatitude}>
-                    {`${props.showLatitude ? 'Hide' : 'Show'} lines of latitude`}
+                    {`${props.showLatitude ? 'Hide' : 'Show'} degrees of latitude`}
                 </div>
             </div>
             <ModeSelector

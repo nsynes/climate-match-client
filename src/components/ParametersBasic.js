@@ -23,7 +23,7 @@ class ParametersBasic extends React.Component {
             climate = value;
         }
         const [start, end] = climate.split('-').map((x) => parseInt(x));
-        const currentClimate = end-start <= 10 ? '2001-2010' : '1981-2010';
+        const currentClimate = end-start <= 10 ? '2011-2020' : '1981-2010';
         if ( question === 'currentSearch' ) {
             this.props.handleDropdownChange(currentClimate,'searchClimate');
             this.props.handleDropdownChange(climate,'localClimate');

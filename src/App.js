@@ -234,6 +234,7 @@ class App extends React.Component {
                     loading={loading}
                     mode={mode}
                     params={params}
+                    showLatitude={this.state.showLatitude}
                     handleShowLatitude={this.handleShowLatitude}
                     handleModeChange={this.handleModeChange}
                     handleDropdownChange={this.handleDropdownChange}

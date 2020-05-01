@@ -9,7 +9,11 @@ const Inputs = (props) => {
     return (
         <div className='inputs-container'>
             <Title />
-            <div className='link' style={{textAlign: 'center'}} onClick={props.handleShowLatitude}>Show latitude lines</div><br/>
+            <div style={{textAlign: 'center', paddingBottom: '1em'}}>
+                <div className='link' style={{display:'inline-block'}} onClick={props.handleShowLatitude}>
+                    {`${props.showLatitude ? 'Hide' : 'Show'} latitude lines`}
+                </div>
+            </div>
             <ModeSelector
                 mode={props.mode}
                 handleModeChange={props.handleModeChange} />

@@ -14,7 +14,7 @@ const LatitudeLinesGeoJSON = (props) => {
         else if ( feature.geometry.coordinates[0][1] % 10 === 0 ) {
             return {color: "#000000",weight: 0.8,opacity: 1,dashArray: '5,5'}
         } else {
-            return {color: "#000000",weight: 0.2,opacity: 1,dashArray: '5,5'}
+            return {color: "#000000",weight: 0.4,opacity: 1,dashArray: '5,5'}
         }
         
     }

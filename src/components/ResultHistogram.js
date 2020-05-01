@@ -65,7 +65,7 @@ const ResultHistogram = (props) => {
                 },
                 xaxis : {
                     range: [0, maxCD+histData.binWidth],
-                    title: 'CD Score',
+                    title: 'Climate Difference Score',
                     fixedrange: true
                 },
                 autosize: true,

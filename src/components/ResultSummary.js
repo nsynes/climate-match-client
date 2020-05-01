@@ -46,7 +46,6 @@ class ResultSummary extends React.Component {
                                     maxCD={this.props.resultParams.maxCD}
                                     selectedCell={this.props.selectedCell}
                                     colour={this.props.colour} />
-                                <div style={{padding: '0.5em'}}></div>
                                 <Legend
                                     display={this.props.display}
                                     colour={this.props.colour}

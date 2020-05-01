@@ -13,7 +13,7 @@
 }
 .result-summary.visible {
     width: 33%;
-    min-width: 300px;
+    min-width: 340px;
     opacity: 0.5;
 }
 .result-summary.hidden {

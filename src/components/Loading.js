@@ -3,19 +3,16 @@ import PropType from 'prop-types';
 import './Loading.css';
 
 const Loading = (props) => {
-    const { width, height } = props;
-
-    return <div className="loading" style={{ width, height }} />;
+    const { size } = props;
+    return <div className={`loading ${size ? size : 'large'}`} />;
 }
 
 Loading.defaultProps = {
-  width: '28px',
-  height: '28px',
+  size: 'large'
 };
 
 Loading.propTypes = {
-    width: PropType.string,
-    height: PropType.string,
+    size: PropType.string,
 }
 
 export default Loading;

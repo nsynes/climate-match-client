@@ -1,34 +1,13 @@
 input, label, select {
-    display:block;
-}
-.form-container {
-    display: flex;
-    justify-content: center;
+    display: block;
 }
 .form-inline {
-    display: inline-flex;
-    flex-flow: row wrap;
-}
-.form-inline label {
-    margin: 5px 10px 5px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 .form-inline input {
     vertical-align: middle;
     margin: 5px 10px 5px 0;
     padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-}
-@media all and (max-width: 800px) {
-    .form-inline input {
-      margin: 10px 0;
-    }
-    .form-inline select {
-        margin: 10px 0;
-      }
-  
-    .form-inline {
-      flex-direction: column;
-      align-items: stretch;
-    }
 }

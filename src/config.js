@@ -1,5 +1,3 @@
-import { testClimateData, testMinCD, testMaxCD } from './test-data';
-
 export const API_Domain = process.env.NODE_ENV === 'production' ? 'https://climate-api.nicksynes.com' : 'http://localhost:4001';
 export const API_URL_ClimateMatch = `${API_Domain}`;
 export const API_URL_Nominatim_Reverse = 'https://nominatim.openstreetmap.org/reverse';
@@ -16,62 +14,3 @@ export const listnSitesSmall = [{200: 'Low: 200'},{1000: 'Medium: 1,000'},{5000:
 export const listnSitesLarge = [{200: 'Low: 200'},{1000: 'Medium: 1,000'},{5000: 'High: 5,000'},{10000: 'Very High: 10,000'}];
 export const listRegions = [{Europe: 'Europe'}, {PNW: 'Pacific NW'}, {EuropeAndPNW: 'Europe and Pacific NW'}];
 export const listModes = ['Basic','Advanced'];
-
-export const stateDefaults = 
-{
-    loading: false,
-    climateGeojson: '',
-    cellHalfWidth: null,
-    mode: 'Basic',
-    display: 'cd',
-    colour: 'red',
-    selectedCell: {},
-    showLatitude: false,
-    params: {
-        selectedPoint: null,
-        localClimate: '',
-        searchClimate: '',
-        monthsType: 'All',
-        months: [true,true,true,true,true,true,true,true,true,true,true,true],
-        cdVar: 'full',
-        nSites: 5000,
-        region: 'Europe'
-    },
-    resultParams: {},
-    warningMessage: ''
-};
-
-export const stateTestResults =  
-{
-    loading: false,
-    climateGeojson: testClimateData,
-    cellHalfWidth: 0.09999999999999999167 / 2,
-    mode: 'Advanced',
-    display: 'cd',
-    colour: 'red',
-    selectedCell: {},
-    showLatitude: false,
-    params: {
-        selectedPoint: {lat: 51.516198091721684, lng: -0.17578125},
-        localClimate: '1981-2010',
-        searchClimate: '2041-2070',
-        monthsType: 'All',
-        months: [true,true,true,true,true,true,true,true,true,true,true,true],
-        cdVar: 'full',
-        nSites: 1000,
-        region: 'Europe'
-    },
-    resultParams: {
-        selectedPoint: {lat: 51.516198091721684, lng: -0.17578125},
-        region: 'Europe',
-        localClimate: '1981-2010',
-        searchClimate: '2041-2070',
-        monthsType: 'All',
-        months: [1,2,3,4,5,6,7,8,9,10,11,12],
-        cdVar: 'full',
-        nSites: 1000,
-        minCD: testMinCD,
-        maxCD: testMaxCD
-    },
-    warningMessage: ''
-}

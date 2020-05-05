@@ -1,19 +1,18 @@
 import React from 'react';
+import Loading from './Loading';
 import './WarningBanner.css';
 
 const WarningBanner = (props) => {
 
-    if ( props.warningMessage ) {
-        return (
-            <span className='warning-banner'>
-                <div className='warning-message'>
-                    <b>{props.warningMessage}</b>
-                </div>
-            </span>
-        );
-    } else {
-        return (null);
-    }
+    return (
+        <div className='warning-banner'>
+            { props.loading &&
+                <div style={{position: 'relative'}}>
+                    <Loading size='small' />
+                </div> }
+            <b>{props.text}</b>
+        </div>
+    );
 }
 
 export default WarningBanner;

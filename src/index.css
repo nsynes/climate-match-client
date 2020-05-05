@@ -1,11 +1,15 @@
-body {
+body, select {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 0.9em;
+  font-size: 1.1em;
+  line-height: 1.3em;
+}
+select, button {
+  font-size: 1em;
 }
 
 code {
@@ -14,8 +18,20 @@ code {
 }
 .link {
   color: blue;
+  text-decoration: none;
 }
 .link:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+h1, h2 {
+  margin: 0.25em 0.5em;
+  font-size: 1.2em;
+}
+h3, h4 {
+  margin: 0.5em 0;
+}
+h1 {
+  width: 100%;
+  text-align: center;
 }

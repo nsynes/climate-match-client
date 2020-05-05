@@ -9,9 +9,10 @@
     max-width: 200px;
 }
 .checkbox-inline {
+    margin: 5px 5px 5px 0;
     display: inline-flex;
     flex-direction: row;
 }
 .checkbox-label {
-    padding-left: 0.5em;
+    padding-left: 0;
 }

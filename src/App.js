@@ -1,10 +1,16 @@
 import React from 'react';
+
 import HelmetTags from './components/HelmetTags';
-import Outputs from './components/Outputs';
-import Inputs from './components/Inputs';
-import Logos from './components/Logos';
+import Panel from './components/Panel';
+import PanelTabs from './components/PanelTabs';
+import Tool from './components/Tool';
+import Results from './components/Results';
+import Help from './components/Help';
+import About from './components/About';
+import Map from './components/Map';
 import Loading from './components/Loading';
-import { API_URL_ClimateMatch, API_URL_Nominatim_Reverse, stateDefaults, stateTestResults } from './config';
+import { API_URL_ClimateMatch, API_URL_Nominatim_Reverse } from './config';
+import { stateDefaults, stateTestResults } from './defaults';
 import { handleResponse, getHistogramData } from './helpers';
 
 
@@ -45,7 +51,10 @@ class App extends React.Component {
     }
 
     handleMapClick = (e) => {
-        this.setState({ selectedCell: {} });
+        const { selectedCell } = this.state;
+        if ( selectedCell && selectedCell.coordinates ) {
+            this.setState({ selectedCell: {} });
+        }
         if ( !this.state.loading && this.state.climateGeojson === '' ) {
             var { params } = this.state;
             params.selectedPoint = e.latlng;
@@ -100,17 +109,36 @@ class App extends React.Component {
         this.setState({ display: displayUpdate });
     }
 
+    handleTabClick = (side, tabName) => {
+        var { panel } = this.state;
+        const update = tabName === panel[side] ? '' : tabName;
+        panel[side] = update;
+        if ( window.innerWidth <= 800 ) {
+            const oppositeSide = side === 'left' ? 'right' : 'left';
+            panel[oppositeSide] = '';
+        }
+        this.setState({ panel })
+    }
+
+    handleLanguageChange = (e) => {
+        this.setState({language: e.target.value})
+    }
+
     handleRefresh = (e) => {
         e.preventDefault();
 
-        const { params } = this.state;
+        var { params } = this.state;
         params.selectedPoint = null;
+
+        var panel = this.state.panel;
+        if ( panel['right'] === 'Results' ) panel['right'] = '';
 
         this.setState({
             climateGeojson: '',
             warningMessage: '',
             resultParams: {},
-            params: params
+            params: params,
+            panel: panel
         })
     }
 
@@ -156,12 +184,16 @@ class App extends React.Component {
 
     fetchClimateMatch = () => {
 
+        var panel = this.state.panel
+        if ( panel['right'] === 'Results' ) panel['right'] = '';
+
         this.setState({
             climateGeojson: '',
             loading: true,
             warningMessage: '',
             resultParams: {},
-            selectedCell: {}
+            selectedCell: {},
+            panel: panel
         })
 
         var { selectedPoint, localClimate, searchClimate, months, cdVar, nSites, region } = this.state.params;
@@ -187,11 +219,15 @@ class App extends React.Component {
                     minCD: minCD,
                     maxCD: maxCD
                 }
+                var panel = this.state.panel
+                panel['right'] = 'Results';
+                panel['left'] = '';
                 this.setState({
                     resultParams: resultParams,
                     climateGeojson: geojson,
                     cellHalfWidth: 0.09999999999999999167 / 2,
-                    loading: false
+                    loading: false,
+                    panel: panel
                 })
             } else {
                 this.setState({
@@ -215,43 +251,74 @@ class App extends React.Component {
 
     render() {
 
-        const { loading, params, climateGeojson, resultParams, mode, display, cellHalfWidth, warningMessage } = this.state;
+        const { loading, params, showLatitude, selectedCell, climateGeojson, resultParams, panel, language, mode, display, colour, cellHalfWidth, warningMessage } = this.state;
         const histData = climateGeojson ? getHistogramData(climateGeojson, resultParams.minCD, resultParams.maxCD, resultParams.nSites, display, 20) : null;
-        
+
         return (
-            <div style={{width: '100%'}}>
+            <div>
                 <HelmetTags />
-                { loading && <Loading
-                    width='48px'
-                    height='48px'/> }
-                <Outputs
-                    showLatitude={this.state.showLatitude}
-                    colour={this.state.colour}
+                { loading &&
+                <Loading /> }
+                <PanelTabs 
+                    side={'left'}
+                    tabs={['Tool','About']}
+                    show={panel.left}
+                    handleTabClick={this.handleTabClick} />
+                <PanelTabs 
+                    side={'right'}
+                    tabs={resultParams && resultParams.searchClimate ? ['Results','Help'] : ['Help']}
+                    show={panel.right}
+                    handleTabClick={this.handleTabClick} />
+                <Panel
+                    side={'left'}
+                    show={panel.left} 
+                    handleTabClick={this.handleTabClick}>
+                    {panel.left === 'Tool' &&
+                    <Tool
+                        loading={loading}
+                        mode={mode}
+                        showLatitude={showLatitude}
+                        warningMessage={warningMessage}
+                        params={params}
+                        handleModeChange={this.handleModeChange}
+                        handleDropdownChange={this.handleDropdownChange}
+                        handleCheckboxChange={this.handleCheckboxChange}
+                        handleShowLatitude={this.handleShowLatitude}
+                        handleCalculate={this.handleCalculate}
+                        handleRefresh={this.handleRefresh} />}
+                    {panel.left === 'About' &&
+                    <About />}
+                </Panel>
+                <Panel
+                    side={'right'}
+                    show={panel.right} 
+                    handleTabClick={this.handleTabClick}>
+                    {panel.right === 'Help' && 
+                    <Help
+                        language={language}
+                        handleLanguageChange={this.handleLanguageChange} />}
+                    {panel.right === 'Results' &&
+                    <Results
+                        display={display}
+                        colour={colour}
+                        resultParams={resultParams}
+                        histData={histData}
+                        selectedCell={selectedCell}
+                        handleColourChange={this.handleColourChange}
+                        handleDisplayChange={this.handleDisplayChange} />}
+                </Panel>
+                <Map
+                    showLatitude={showLatitude}
+                    display={display}
+                    colour={colour}
+                    resultParams={resultParams}
                     region={params.region}
                     selectedPoint={params.selectedPoint}
-                    resultParams={resultParams}
                     climateGeojson={climateGeojson}
-                    selectedCell={this.state.selectedCell}
-                    display={display}
-                    histData={histData}
                     cellHalfWidth={cellHalfWidth}
-                    warningMessage={warningMessage}
-                    handleGeojsonClick={this.handleGeojsonClick} 
-                    handleColourChange={this.handleColourChange}
+                    selectedCell={selectedCell}
                     handleMapClick={this.handleMapClick}
-                    handleDisplayChange={this.handleDisplayChange} />
-                <Inputs
-                    loading={loading}
-                    mode={mode}
-                    params={params}
-                    showLatitude={this.state.showLatitude}
-                    handleShowLatitude={this.handleShowLatitude}
-                    handleModeChange={this.handleModeChange}
-                    handleDropdownChange={this.handleDropdownChange}
-                    handleCheckboxChange={this.handleCheckboxChange}
-                    handleCalculate={this.handleCalculate}
-                    handleRefresh={this.handleRefresh} />
-                <Logos />
+                    handleGeojsonClick={this.handleGeojsonClick} />
           </div>
         );
     }

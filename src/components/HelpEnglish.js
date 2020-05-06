@@ -13,7 +13,7 @@ const HelpEnglish = (props) => {
                 <ol type='a'>
                     <li><b>Basic mode:</b>  the climate match calculation is performed only on European data; the period over which calculations are made is all 12 months; and the number of matches is 5000.
                     </li>
-                    <li><b>Advanced mode:</b> the region for the climate match calculation is selected (Europe, Pacific North West, or Europe and Pacific North West); the months for which the match is performed can be selected (all year, growing season, and months), if choosing months a new selection grid is presented to select months for matching; the number of matches the program will perform ( limits matches in Low [200] and Medium [1000] to give more precision on the matched area displayed).
+                    <li><b>Advanced mode:</b> the region for the climate match calculation is selected (Europe, Pacific North West, or Europe and Pacific North West); the months for which the match is performed can be selected (all year, growing season, and specific months), if choosing specific months a new selection grid is presented to select months for matching; the number of matches the program will perform ( limits matches in Low [200] and Medium [1000] to give more precision on the matched area displayed).
                     </li>
                 </ol>
                 <li style={{fontWeight: 'bold'}}><h4>Basic Mode Operation</h4></li>

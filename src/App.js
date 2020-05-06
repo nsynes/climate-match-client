@@ -11,7 +11,7 @@ import Map from './components/Map';
 import Loading from './components/Loading';
 import { API_URL_ClimateMatch, API_URL_Nominatim_Reverse } from './config';
 import { stateDefaults, stateTestResults } from './defaults';
-import { handleResponse, getHistogramData } from './helpers';
+import { handleResponse } from './helpers';
 
 
 class App extends React.Component {
@@ -252,8 +252,7 @@ class App extends React.Component {
     render() {
 
         const { loading, params, showLatitude, selectedCell, climateGeojson, resultParams, panel, language, mode, display, colour, cellHalfWidth, warningMessage } = this.state;
-        const histData = climateGeojson ? getHistogramData(climateGeojson, resultParams.minCD, resultParams.maxCD, resultParams.nSites, display, 20) : null;
-
+        
         return (
             <div>
                 <HelmetTags />
@@ -302,7 +301,7 @@ class App extends React.Component {
                         display={display}
                         colour={colour}
                         resultParams={resultParams}
-                        histData={histData}
+                        climateGeojson={climateGeojson}
                         selectedCell={selectedCell}
                         handleColourChange={this.handleColourChange}
                         handleDisplayChange={this.handleDisplayChange} />}

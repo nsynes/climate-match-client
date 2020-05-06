@@ -6,11 +6,17 @@ import PanelContentHeader from './PanelContentHeader';
 import PanelContentBody from './PanelContentBody';
 import ResultParameters from './ResultParameters';
 import ResultHistogram from './ResultHistogram';
+import { getHistogramData } from '../helpers';
 import './Results.css';
 
 const Results = (props) => {
 
-    if ( props.resultParams && props.resultParams.searchClimate ) {
+    const { climateGeojson, resultParams, display, selectedCell, colour } = props;
+
+    const histData = climateGeojson ? getHistogramData(climateGeojson, resultParams.minCD, resultParams.maxCD, resultParams.nSites, display, 20) : null;
+
+
+    if ( resultParams && resultParams.searchClimate ) {
         return (
             <PanelContent>
                 <PanelContentHeader>
@@ -18,27 +24,27 @@ const Results = (props) => {
                 </PanelContentHeader>
                 <PanelContentBody>
                     <SummaryText
-                        resultParams={props.resultParams} />
+                        resultParams={resultParams} />
                     <br />
                     <div style={{fontStyle: 'italic'}}>Note: Climate Difference scores closest to zero indicate the best match.</div>
                     <div className='summary-graph'>
                         <ResultHistogram
-                            histData={props.histData}
-                            minCD={props.resultParams.minCD}
-                            maxCD={props.resultParams.maxCD}
-                            selectedCell={props.selectedCell}
-                            colour={props.colour} />
+                            histData={histData}
+                            minCD={resultParams.minCD}
+                            maxCD={resultParams.maxCD}
+                            selectedCell={selectedCell}
+                            colour={colour} />
                         <Legend
-                            display={props.display}
-                            colour={props.colour}
-                            nSites={props.resultParams.nSites}
-                            minCD={props.resultParams.minCD}
-                            maxCD={props.resultParams.maxCD}
+                            display={display}
+                            colour={colour}
+                            nSites={resultParams.nSites}
+                            minCD={resultParams.minCD}
+                            maxCD={resultParams.maxCD}
                             handleColourChange={props.handleColourChange}
                             handleDisplayChange={props.handleDisplayChange} />
                     </div>
                     <ResultParameters
-                        resultParams={props.resultParams} />
+                        resultParams={resultParams} />
                 </PanelContentBody>
             </PanelContent>
         );

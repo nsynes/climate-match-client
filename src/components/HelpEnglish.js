@@ -31,11 +31,11 @@ const HelpEnglish = (props) => {
                 <li style={{fontWeight: 'bold'}}><h4>Advanced Mode Operation</h4></li>
                 <ol type='a'>
                     <li><b>Region</b><br/>
-                    Select Europe – Pacific North West – or both Europe & Pacific North West. selecting both regions will take 20-30 seconds for results to be displayed.
+                    Select Europe – Pacific North West – or both Europe & Pacific North West. Selecting both regions will take 20-30 seconds for results to be displayed.
                     </li>
                     <li><b>Local Climate</b><br/>
                     This allows the user to select which climate data to assign to the point of interest. 
-                    Select the Local Climate to the period range on which you wish to search for analogs. This can be a future period or a past period. If you wish to find current locations with the climate most similar to your location in the future – than select a Local Climate period range in the future (e.g. 2041-2050).
+                    Select the Local Climate to the period range on which you wish to search for analogs. This can be a future period or a past period. If you wish to find current locations with the climate most similar to your location in the future – then select a Local Climate period range in the future (e.g. 2041-2050).
                     Select the Local Climate to the current period range if you wish to find future locations with a climate most similar to your location – (e.g. select the Local Climate period range 2011-2020).
                     </li>
                     <li><b>Search Climate</b><br/>
@@ -44,7 +44,7 @@ const HelpEnglish = (props) => {
                     <li><b>Variables</b> (Same as 3c).<br/>
                     </li>
                     <li><b>Months</b><br/>
-                    The months for which the match is performed can be selected (all year, growing season, and months), if choosing ‘months’ a new selection grid is presented to select months for matching.
+                    The months for which the match is performed can be selected (all year, growing season, and specific months), if choosing ‘specific months’ a new selection grid is presented to select months for matching.
                     </li>
                     <li><b>Number of Matches</b><br/>
                     The number of matches the program will perform (limits matches in Low and Medium to give more precision on the matched area displayed).

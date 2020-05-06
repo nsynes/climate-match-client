@@ -202,7 +202,7 @@ class App extends React.Component {
 
         months = months.map((b, i) => b ? i+1 : null).filter((m) => m)
 
-        fetch(`${API_URL_ClimateMatch}?lat=${selectedPoint.lat}&lon=${selectedPoint.lng}&m=${months}&fc=${localClimate}&lc=${searchClimate}&v=${cdVar}&n=${nSites}&r=${region}`)
+        fetch(`${API_URL_ClimateMatch}?lat=${selectedPoint.lat}&lon=${selectedPoint.lng}&m=${months}&lc=${localClimate}&sc=${searchClimate}&v=${cdVar}&n=${nSites}&r=${region}`)
         .then(handleResponse)
         .then((geojson) => {
             if ( geojson ) {
@@ -239,6 +239,7 @@ class App extends React.Component {
             }
         })
         .catch((error) => {
+            //console.log('error', error)
             this.setState({
                 resultParams: {},
                 climateGeojson: '',

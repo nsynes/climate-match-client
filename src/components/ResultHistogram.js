@@ -51,7 +51,7 @@ const ResultHistogram = (props) => {
         useResizeHandler
         layout={{
             margin: {
-                l: 40,
+                l: 50,
                 r: 10,
                 b: 40,
                 t: 10,

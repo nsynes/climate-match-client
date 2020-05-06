@@ -3,8 +3,7 @@ import React from 'react';
 const HelpFrancais = (props) => {
 
     return (
-        <div className='help-content'>
-            
+        <div>
             <h3>Outil de correspondance climatique</h3>
             La version 'Basic' de l'outil de correspondance climatique utilise les projections climatiques mensuelles UKCP18 à 12 km de résolution RCP8.5 jusqu'en 2080 et les climats historiques mensuels simulés à partir de 1981. Les facteurs de recherche climatiques sont la température moyenne mensuelle, les précipitations mensuelles totales et la plage de température diurne moyenne mensuelle.
             <ol>
@@ -36,8 +35,8 @@ const HelpFrancais = (props) => {
                     </li>
                     <li><b>Climat local</b><br/>
                     Cela permet à l'utilisateur de sélectionner les données climatiques à attribuer au point d'intérêt.
-Sélectionnez le climat local à la plage de période sur laquelle vous souhaitez rechercher des analogues. Cela peut être une période future ou une période passée. Si vous souhaitez trouver des emplacements actuels avec le climat le plus similaire à votre emplacement à l'avenir - sélectionnez une plage de période de climat local à l'avenir (par exemple 2041-2050).
-Sélectionnez le climat local à la plage de période actuelle si vous souhaitez trouver de futurs emplacements avec un climat le plus similaire à votre emplacement - (par exemple, sélectionnez la plage de période de climat local 2011-2020).
+                    Sélectionnez le climat local à la plage de période sur laquelle vous souhaitez rechercher des analogues. Cela peut être une période future ou une période passée. Si vous souhaitez trouver des emplacements actuels avec le climat le plus similaire à votre emplacement à l'avenir - sélectionnez une plage de période de climat local à l'avenir (par exemple 2041-2050).
+                    Sélectionnez le climat local à la plage de période actuelle si vous souhaitez trouver de futurs emplacements avec un climat le plus similaire à votre emplacement - (par exemple, sélectionnez la plage de période de climat local 2011-2020).
                     </li>
                     <li><b>Climat de recherche</b><br/>
                     Sélectionnez la plage de recherche de la période climatique à l'avenir si vous souhaitez comprendre où le climat de votre emplacement correspondra le mieux à un climat futur. Vous pouvez également définir ce paramètre sur le climat actuel si vous recherchez une zone analogique avec un climat projeté de l'emplacement que vous avez sélectionné.

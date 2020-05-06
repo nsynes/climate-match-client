@@ -1,0 +1,12 @@
+.tab-button-container {
+    position: absolute;
+    z-index: 3;
+    display: inline-flex;
+    flex-flow: row;
+}
+.tab-button-container.left {
+    left: 0;
+}
+.tab-button-container.right {
+    right: 0;
+}

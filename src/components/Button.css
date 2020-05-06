@@ -10,12 +10,12 @@
     font-weight: bold;
     color: white;
     background-color: grey;
-    max-width: 100px;
     transition-duration: 0.25s;
-    box-shadow: 1px 3px black;
+    box-shadow: 1px 2px black;
 }
 .submit-button:hover {
     background-color: #026937;
+    cursor: pointer;
 }
 .submit-button:active {
     background-color: #014A2A;

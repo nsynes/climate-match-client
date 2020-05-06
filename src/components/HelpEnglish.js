@@ -3,7 +3,7 @@ import React from 'react';
 const HelpEnglish = (props) => {
 
     return (
-        <div className='help-content'>
+        <div>
             <h3>Climate Matching Tool</h3>
             The Climate Matching Tool ‘Basic’ version uses the monthly UKCP18 12 km resolution RCP8.5 future climate projections to 2080 and simulated monthly historic climates from 1981. The climatic search factors are monthly mean temperature, total monthly precipitation, and monthly mean diurnal temperature range.
             <ol>

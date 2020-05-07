@@ -10,6 +10,7 @@ class ParametersBasic extends React.Component {
 
         props.handleDropdownChange(5000, 'nSites')
         props.handleDropdownChange('All', 'monthsType')
+        props.handleDropdownChange('Europe', 'region')
 
         const { localClimate, searchClimate } = props;
         const [localStart, localEnd] = localClimate.split('-').map((x) => parseInt(x));

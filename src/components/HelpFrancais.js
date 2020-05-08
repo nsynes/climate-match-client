@@ -11,7 +11,7 @@ const HelpFrancais = (props) => {
                 <li style={{fontWeight: 'bold'}}><h4>Mode</h4></li>
                 Le paramètre du mode de base ou avancé est sélectionné.
                 <ol type='a'>
-                    <li><b>Mode de base:</b> le calcul de la correspondance climatique est effectué uniquement sur des données européennes; la période sur laquelle les calculs sont effectués correspond à chacun des 12 mois; et le nombre de matchs est fixé à 5 000.
+                    <li><b>Mode de base:</b> le calcul de la correspondance climatique est effectué uniquement sur des données européennes; la période sur laquelle les calculs sont effectués correspond à chacun des 12 mois; et le nombre de matchs est fixé à 10 000.
                     </li>
                     <li><b>Mode avancé:</b> la région pour le calcul de la correspondance climatique est sélectionnée (Europe, Pacifique Nord-Ouest ou Europe et Pacifique Nord-Ouest); les mois pour lesquels le match est effectué peuvent être sélectionnés (toute l'année, la saison de croissance et les mois), si le choix des mois une nouvelle grille de sélection est présentée pour sélectionner les mois pour le match; le nombre de correspondances que le programme effectuera (ceci limite les correspondances en Bas et Moyen pour donner plus de précision sur la zone correspondante affichée).
                     </li>
@@ -41,10 +41,10 @@ const HelpFrancais = (props) => {
                     <li><b>Climat de recherche</b><br/>
                     Sélectionnez la plage de recherche de la période climatique à l'avenir si vous souhaitez comprendre où le climat de votre emplacement correspondra le mieux à un climat futur. Vous pouvez également définir ce paramètre sur le climat actuel si vous recherchez une zone analogique avec un climat projeté de l'emplacement que vous avez sélectionné.
                     </li>
-                    <li><b>Variables</b> (identiques à 3e).<br/>
+                    <li><b>Variables</b> (identiques à 3c).<br/>
                     </li>
                     <li><b>Mois</b><br/>
-                    Les mois pour lesquels le match est effectué peuvent être sélectionnés (toute l'année, la saison de croissance et les mois), si vous choisissez «mois», une nouvelle grille de sélection est présentée pour sélectionner les mois pour le match.
+                    Les mois pour lesquels le match est effectué peuvent être sélectionnés (toute l'année, la saison de croissance et les mois, si vous choisissez «mois», une nouvelle grille de sélection est présentée pour sélectionner les mois pour le match.
                     </li>
                     <li><b>Nombre de matchs</b><br/>
                     Le nombre de correspondances que le programme effectuera (ceci limite les correspondances en Bas et Moyen pour donner plus de précision sur la zone correspondante affichée).

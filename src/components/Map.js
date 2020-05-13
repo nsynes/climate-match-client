@@ -51,13 +51,13 @@ const Map = (props) => {
             <Marker position={props.selectedPoint} icon={IconTree} draggable={false} />}
             <SelectedClimateGeoJSON
                 selectedCell={props.selectedCell}
-                cellHalfWidth={props.cellHalfWidth} />
+                cellDimensions={props.cellDimensions} />
             <ClimateGeoJSON
                 display={props.display}
                 colour={props.colour}
                 resultParams={props.resultParams}
                 climateGeojson={props.climateGeojson}
-                cellHalfWidth={props.cellHalfWidth}
+                cellDimensions={props.cellDimensions}
                 handleGeojsonClick={props.handleGeojsonClick} />
             <RegionGeoJSON
                 region={props.region}/>

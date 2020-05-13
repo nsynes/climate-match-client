@@ -5,6 +5,9 @@ import { getColorFromFraction } from '../helpers';
 
 const ClimateGeoJSON = (props) => {
 
+    const cellHalfWidth = props.cellDimensions ? props.cellDimensions[0]/2 : null;
+    const cellHalfHeight = props.cellDimensions ? props.cellDimensions[1]/2 : null;
+
     var onEachFeature = (feature, layer) => {
         if (feature.properties && feature.properties.cd && feature.properties.n) {
             layer.bindPopup(`<b>Rank</b>: ${feature.properties.n} of ${props.resultParams.nSites}<br /><b>CD</b>: ${feature.properties.cd}`);
@@ -30,7 +33,7 @@ const ClimateGeoJSON = (props) => {
             lng: feature.geometry.coordinates[0],
             lat: feature.geometry.coordinates[1]
         }
-        const bounds = [[latlng.lat-props.cellHalfWidth, latlng.lng-props.cellHalfWidth], [latlng.lat+props.cellHalfWidth, latlng.lng+props.cellHalfWidth]];
+        const bounds = [[latlng.lat-cellHalfHeight, latlng.lng-cellHalfWidth], [latlng.lat+cellHalfHeight, latlng.lng+cellHalfWidth]];
         return L.rectangle(bounds, geojsonMarkerOptions)
     };
 

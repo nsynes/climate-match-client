@@ -10,7 +10,7 @@ import About from './components/About';
 import Map from './components/Map';
 import Loading from './components/Loading';
 import { API_URL_ClimateMatch, API_URL_Nominatim_Reverse } from './config';
-import { stateDefaults, stateTestResults } from './defaults';
+import { stateDefaults } from './defaults'; //stateTestResults } from './defaults';
 import { handleResponse } from './helpers';
 
 
@@ -204,7 +204,9 @@ class App extends React.Component {
 
         fetch(`${API_URL_ClimateMatch}?lat=${selectedPoint.lat}&lon=${selectedPoint.lng}&m=${months}&lc=${localClimate}&sc=${searchClimate}&v=${cdVar}&n=${nSites}&r=${region}`)
         .then(handleResponse)
-        .then((geojson) => {
+        .then((response) => {
+            const geojson = response.geojsonData;
+            const cellDimensions = response.pixelShape;
             if ( geojson ) {
                 const minCD = Math.min.apply(Math, geojson.features.map(function(o) { return o.properties.cd; }))
                 const maxCD = Math.max.apply(Math, geojson.features.map(function(o) { return o.properties.cd; }))
@@ -225,7 +227,7 @@ class App extends React.Component {
                 this.setState({
                     resultParams: resultParams,
                     climateGeojson: geojson,
-                    cellHalfWidth: 0.09999999999999999167 / 2,
+                    cellDimensions: cellDimensions,
                     loading: false,
                     panel: panel
                 })
@@ -233,7 +235,7 @@ class App extends React.Component {
                 this.setState({
                     resultParams: {},
                     climateGeojson: '',
-                    cellHalfWidth: null,
+                    cellDimensions: null,
                     loading: false
                 })
             }
@@ -243,7 +245,7 @@ class App extends React.Component {
             this.setState({
                 resultParams: {},
                 climateGeojson: '',
-                cellHalfWidth: null,
+                cellDimensions: null,
                 loading: false,
                 warningMessage: 'No results for selected location.'
             })
@@ -252,7 +254,7 @@ class App extends React.Component {
 
     render() {
 
-        const { loading, params, showLatitude, selectedCell, climateGeojson, resultParams, panel, language, mode, display, colour, cellHalfWidth, warningMessage } = this.state;
+        const { loading, params, showLatitude, selectedCell, climateGeojson, resultParams, panel, language, mode, display, colour, cellDimensions, warningMessage } = this.state;
         
         return (
             <div>
@@ -315,7 +317,7 @@ class App extends React.Component {
                     region={params.region}
                     selectedPoint={params.selectedPoint}
                     climateGeojson={climateGeojson}
-                    cellHalfWidth={cellHalfWidth}
+                    cellDimensions={cellDimensions}
                     selectedCell={selectedCell}
                     handleMapClick={this.handleMapClick}
                     handleGeojsonClick={this.handleGeojsonClick} />

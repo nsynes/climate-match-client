@@ -4,6 +4,9 @@ import L from 'leaflet';
 
 const SelectedClimateGeoJSON = (props) => {
 
+    const cellHalfWidth = props.cellDimensions ? props.cellDimensions[0]/2 : null;
+    const cellHalfHeight = props.cellDimensions ? props.cellDimensions[1]/2 : null;
+
     var setSelecteCellStyle = (feature) => {
         var geojsonMarkerOptions
         if ( feature.properties.duplicate === 1 ) {
@@ -30,7 +33,7 @@ const SelectedClimateGeoJSON = (props) => {
             lng: props.selectedCell.coordinates[0],
             lat: props.selectedCell.coordinates[1]
         }
-        const bounds = [[latlng.lat-props.cellHalfWidth, latlng.lng-props.cellHalfWidth], [latlng.lat+props.cellHalfWidth, latlng.lng+props.cellHalfWidth]];
+        const bounds = [[latlng.lat-cellHalfHeight, latlng.lng-cellHalfWidth], [latlng.lat+cellHalfHeight, latlng.lng+cellHalfWidth]];
         return L.rectangle(bounds, geojsonMarkerOptions)
     }
 

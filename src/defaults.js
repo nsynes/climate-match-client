@@ -4,7 +4,7 @@ export const stateDefaults =
 {
     loading: false,
     climateGeojson: '',
-    cellHalfWidth: null,
+    cellDimensions: null,
     mode: 'Basic',
     display: 'cd',
     colour: 'red',
@@ -30,7 +30,7 @@ export const stateTestResults =
 {
     loading: false,
     climateGeojson: testClimateData,
-    cellHalfWidth: 0.09999999999999999167 / 2,
+    cellDimensions: [0.09999999999999999167 / 2, 0.09999999999999999167 / 2],
     mode: 'Advanced',
     display: 'cd',
     colour: 'red',

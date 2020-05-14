@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './PanelContent.css';
 
 const PanelContent = (props) => {

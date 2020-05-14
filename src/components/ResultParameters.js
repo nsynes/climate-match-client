@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './ResultParameters.css';
 import { listMonths, cdVarNames, listRegions } from '../config';
 import { displayCommas } from '../helpers';

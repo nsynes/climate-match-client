@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Legend from './Legend';
 import SummaryText from './SummaryText';
 import PanelContent from './PanelContent';

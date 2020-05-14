@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { displayCommas } from '../helpers';
 import './Legend.css';
 

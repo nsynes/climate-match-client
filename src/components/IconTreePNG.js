@@ -1,4 +1,5 @@
 import L from 'leaflet';
+
 import './IconTree.css';
 
 const IconTree = new L.Icon({

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pane, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
+
 import { getColorFromFraction } from '../helpers';
 
 const ClimateGeoJSON = (props) => {

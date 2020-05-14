@@ -241,13 +241,13 @@ class App extends React.Component {
             }
         })
         .catch((error) => {
-            //console.log('error', error)
+            console.log('error', error)
             this.setState({
                 resultParams: {},
                 climateGeojson: '',
                 cellDimensions: null,
                 loading: false,
-                warningMessage: 'No results for selected location.'
+                warningMessage: error.message || 'No results for selected location.'
             })
         });
     }

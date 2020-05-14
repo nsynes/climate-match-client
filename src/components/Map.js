@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
+
 import LatitudeLinesGeoJSON from './LatitudeLinesGeoJSON';
 import SelectedClimateGeoJSON from './SelectedClimateGeoJSON';
 import ClimateGeoJSON from './ClimateGeoJSON';

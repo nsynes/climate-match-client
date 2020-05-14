@@ -1,5 +1,6 @@
 import React from 'react';
 import { GeoJSON } from 'react-leaflet';
+
 import Europe from '../data/Europe.json';
 import PNW from '../data/PNW.json';
 import EuropeAndPNW from '../data/EuropeAndPNW.json';

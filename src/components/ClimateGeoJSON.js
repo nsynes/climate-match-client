@@ -2,7 +2,7 @@ import React from 'react';
 import { Pane, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
 
-import { getColorFromFraction } from '../helpers';
+import { getColorFromFraction, displayCommas } from '../helpers';
 
 const ClimateGeoJSON = (props) => {
 
@@ -11,7 +11,7 @@ const ClimateGeoJSON = (props) => {
 
     var onEachFeature = (feature, layer) => {
         if (feature.properties && feature.properties.cd && feature.properties.n) {
-            layer.bindPopup(`<b>Rank</b>: ${feature.properties.n} of ${props.resultParams.nSites}<br /><b>CD</b>: ${feature.properties.cd}`);
+            layer.bindPopup(`<b>Rank</b>: ${displayCommas(feature.properties.n)} of ${displayCommas(props.resultParams.nSites)}<br /><b>CD</b>: ${feature.properties.cd}`);
         }
     }
 

@@ -1,4 +1,5 @@
-export const API_Domain = process.env.NODE_ENV === 'production' ? 'https://climate-api.nicksynes.com' : 'http://localhost:4001';
+import { API_Domain } from './api-domain';
+
 export const API_URL_ClimateMatch = `${API_Domain}`;
 export const API_URL_Nominatim_Reverse = 'https://nominatim.openstreetmap.org/reverse';
 export const URL_Map_Tiles = process.env.NODE_ENV === 'production' ? 'https://{s}.tile.osm.org/{z}/{x}/{y}.png' : 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';

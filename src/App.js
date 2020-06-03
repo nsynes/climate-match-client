@@ -232,6 +232,7 @@ class App extends React.Component {
                     panel: panel
                 })
             } else {
+                console.log('geojson data not found in API response')
                 this.setState({
                     resultParams: {},
                     climateGeojson: '',

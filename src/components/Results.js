@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import Legend from './Legend';
 import SummaryText from './SummaryText';
@@ -6,9 +6,11 @@ import PanelContent from './PanelContent';
 import PanelContentHeader from './PanelContentHeader';
 import PanelContentBody from './PanelContentBody';
 import ResultParameters from './ResultParameters';
-import ResultHistogram from './ResultHistogram';
+import Loading from './Loading';
 import { getHistogramData } from '../helpers';
 import './Results.css';
+
+const ResultHistogram = React.lazy(() => import('./ResultHistogram'));
 
 const Results = (props) => {
 
@@ -29,12 +31,14 @@ const Results = (props) => {
                     <br />
                     <div style={{fontStyle: 'italic'}}>Note: Climate Difference scores closest to zero indicate the best match.</div>
                     <div className='summary-graph'>
+                    <Suspense fallback={<div className='loading-histo'><Loading size='small' /></div>}>
                         <ResultHistogram
                             histData={histData}
                             minCD={resultParams.minCD}
                             maxCD={resultParams.maxCD}
                             selectedCell={selectedCell}
                             colour={colour} />
+                    </Suspense>
                         <Legend
                             display={display}
                             colour={colour}

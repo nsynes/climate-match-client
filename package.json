@@ -3,13 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.9.8",
-    "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "leaflet": "^1.6.0",
-    "memoize-one": "^5.1.1",
     "plotly.js": "^1.54.1",
     "react": "^16.13.1",
     "react-app-polyfill": "^1.0.6",
@@ -17,9 +14,11 @@
     "react-helmet": "^5.2.1",
     "react-leaflet": "^2.6.3",
     "react-plotly.js": "^2.4.0",
-    "react-scripts": "3.4.0"
+    "react-scripts": "3.4.0",
+    "source-map-explorer": "^2.4.2"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts --max_old_space_size=4096 start",
     "build": "react-scripts --max_old_space_size=4096 build",
     "test": "react-scripts test",

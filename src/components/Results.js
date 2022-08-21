@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 
+import { API_Domain } from '../api-domain';
 import Legend from './Legend';
 import SummaryText from './SummaryText';
 import PanelContent from './PanelContent';
@@ -14,7 +15,7 @@ const ResultHistogram = React.lazy(() => import('./ResultHistogram'));
 
 const Results = (props) => {
 
-    const { climateGeojson, resultParams, display, selectedCell, colour } = props;
+    const { climateGeojson, downloadPath, resultParams, display, selectedCell, colour } = props;
 
     const histData = climateGeojson ? getHistogramData(climateGeojson, resultParams.minCD, resultParams.maxCD, resultParams.nSites, display, 20) : null;
 
@@ -26,6 +27,7 @@ const Results = (props) => {
                     <h2>Results Summary</h2>
                 </PanelContentHeader>
                 <PanelContentBody>
+                    <a href={`${API_Domain}/${downloadPath}`}>Download results</a><br/><br/>
                     <SummaryText
                         resultParams={resultParams} />
                     <br />

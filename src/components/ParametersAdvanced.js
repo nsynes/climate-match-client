@@ -4,6 +4,7 @@ import Checkboxes from './Checkboxes';
 import Dropdown from './Dropdown';
 import './Parameters.css';
 import { baselineYears10, baselineYears30, futureYears10, futureYears30, listMonthsTypes, listMonths, cdVarNames, listnSitesSmall, listnSitesLarge, listRegions } from '../config';
+import TreeImage from '../img/tree.png';
 
 const ParametersAdvanced = (props) => {
 
@@ -71,6 +72,9 @@ const ParametersAdvanced = (props) => {
                 listOptions={region === 'EuropeAndPNW' ? listnSitesLarge : listnSitesSmall}
                 toolTipText='How many matches should be returned?'
                 handleChange={props.handleDropdownChange} />
+            <div style={{marginBottom: "1em"}}>
+                Click on the map (<img src={TreeImage} height={20} width={17} />) to select a climate match location
+            </div>
         </form>
     );
 }

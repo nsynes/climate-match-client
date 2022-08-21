@@ -3,6 +3,7 @@ import React from 'react';
 import Dropdown from './Dropdown';
 import './Parameters.css';
 import { futureYears10, futureYears30, cdVarNames } from '../config';
+import TreeImage from '../img/tree.png';
 
 class ParametersBasic extends React.Component {
 
@@ -88,7 +89,10 @@ class ParametersBasic extends React.Component {
                     initialValue={cdVar}
                     listOptions={cdVarNames}
                     toolTipText='Which variables should be included in the analysis?'
-                    handleChange={this.props.handleDropdownChange} />                
+                    handleChange={this.props.handleDropdownChange} />
+                <div style={{marginBottom: "1em"}}>
+                    Click on the map (<img src={TreeImage} height={20} width={17} />) to select a climate match location
+                </div>
             </form>
         );
     }

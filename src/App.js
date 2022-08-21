@@ -207,6 +207,8 @@ class App extends React.Component {
         .then((response) => {
             const geojson = response.geojsonData;
             const cellDimensions = response.pixelShape;
+            const downloadPath = response.downloadPath;
+            
             if ( geojson ) {
                 const minCD = Math.min.apply(Math, geojson.features.map(function(o) { return o.properties.cd; }))
                 const maxCD = Math.max.apply(Math, geojson.features.map(function(o) { return o.properties.cd; }))
@@ -228,6 +230,7 @@ class App extends React.Component {
                     resultParams: resultParams,
                     climateGeojson: geojson,
                     cellDimensions: cellDimensions,
+                    downloadPath: downloadPath,
                     loading: false,
                     panel: panel
                 })
@@ -255,7 +258,7 @@ class App extends React.Component {
 
     render() {
 
-        const { loading, params, showLatitude, selectedCell, climateGeojson, resultParams, panel, language, mode, display, colour, cellDimensions, warningMessage } = this.state;
+        const { loading, params, showLatitude, selectedCell, climateGeojson, downloadPath, resultParams, panel, language, mode, display, colour, cellDimensions, warningMessage } = this.state;
         
         return (
             <div>
@@ -306,6 +309,7 @@ class App extends React.Component {
                         colour={colour}
                         resultParams={resultParams}
                         climateGeojson={climateGeojson}
+                        downloadPath={downloadPath}
                         selectedCell={selectedCell}
                         handleColourChange={this.handleColourChange}
                         handleDisplayChange={this.handleDisplayChange} />}

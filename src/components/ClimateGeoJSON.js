@@ -2,7 +2,7 @@ import React from 'react';
 import { Pane, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
 
-import { getColorFromFraction, displayCommas } from '../helpers';
+import { accurateRound, displayCommas, getColorFromFraction, highlightColour } from '../helpers';
 
 const ClimateGeoJSON = (props) => {
 
@@ -15,18 +15,26 @@ const ClimateGeoJSON = (props) => {
         }
     }
 
-    var setStyle = (feature) => {
+    var setStyle = (feature, highlightBin) => {
 
-        const fraction = props.display === 'rank' ? feature.properties.n / props.resultParams.nSites : feature.properties.cd / props.resultParams.maxCD;
-        const colour = getColorFromFraction(fraction, props.colour)
+        var colour = "";
+        var opacity = 0.8
         
+        if (highlightBin[0] !== null && feature.properties.cd >= accurateRound(highlightBin[0], 4) && feature.properties.cd < accurateRound(highlightBin[1], 4)) {
+            colour = highlightColour(props.colour);
+            opacity=1;
+        } else {
+            const fraction = props.display === 'rank' ? feature.properties.n / props.resultParams.nSites : feature.properties.cd / props.resultParams.maxCD;
+            colour = getColorFromFraction(fraction, props.colour)
+        }
+
         const geojsonMarkerOptions = {
             fillColor: colour,
-            fillOpacity: 0.8,
+            fillOpacity: opacity,
             stroke: true,
             color: colour,
             weight: 0.5,
-            opacity: 0.8,
+            opacity: opacity,
             pane: 'all'
         };
 
@@ -39,12 +47,13 @@ const ClimateGeoJSON = (props) => {
     };
 
     if ( props.climateGeojson ) {
+
         return (
             <Pane name='all' >
                 <GeoJSON
-                    key={`${props.display}-${props.colour}`}
+                    key={`${props.display}-${props.colour}-${props.highlightBin[0]}`}
                     data={props.climateGeojson}
-                    pointToLayer={setStyle}
+                    pointToLayer={(feature) => setStyle(feature, props.highlightBin)}
                     onEachFeature={onEachFeature}
                     onClick={props.handleGeojsonClick}>
                 </GeoJSON>

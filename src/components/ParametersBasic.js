@@ -91,7 +91,7 @@ class ParametersBasic extends React.Component {
                     toolTipText='Which variables should be included in the analysis?'
                     handleChange={this.props.handleDropdownChange} />
                 <div style={{marginBottom: "1em"}}>
-                    Click on the map (<img src={TreeImage} height={20} width={17} />) to select a climate match location
+                    Click on the map (<img src={TreeImage} alt="tree icon" height={20} width={17} />) to select a climate match location
                 </div>
             </form>
         );

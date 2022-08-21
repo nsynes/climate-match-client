@@ -109,6 +109,20 @@ class App extends React.Component {
         this.setState({ display: displayUpdate });
     }
 
+    handleBinChange = (e, histoClicked=true) => {
+
+        if (histoClicked) {
+            const binNumber = e.points[0].binNumber;
+            const dataStart = e.points[0].data.xbins.start;
+            const binWidth = e.points[0].data.xbins.size;
+            const binStart = dataStart + (binNumber * binWidth);
+            const binEnd = dataStart + ((binNumber+1) * binWidth);
+            this.setState({ highlightBin: [binStart, binEnd], highlightBinNum: binNumber });
+        } else {
+            this.setState({ highlightBin: [null, null], highlightBinNum: null });
+        }
+    }
+
     handleTabClick = (side, tabName) => {
         var { panel } = this.state;
         const update = tabName === panel[side] ? '' : tabName;
@@ -135,6 +149,8 @@ class App extends React.Component {
 
         this.setState({
             climateGeojson: '',
+            highlightBinNum: null,
+            highlightBin: [null, null],
             warningMessage: '',
             resultParams: {},
             params: params,
@@ -258,7 +274,7 @@ class App extends React.Component {
 
     render() {
 
-        const { loading, params, showLatitude, selectedCell, climateGeojson, downloadPath, resultParams, panel, language, mode, display, colour, cellDimensions, warningMessage } = this.state;
+        const { loading, params, showLatitude, selectedCell, climateGeojson, downloadPath, resultParams, panel, language, mode, display, colour, cellDimensions, highlightBin, highlightBinNum, warningMessage } = this.state;
         
         return (
             <div>
@@ -311,8 +327,10 @@ class App extends React.Component {
                         climateGeojson={climateGeojson}
                         downloadPath={downloadPath}
                         selectedCell={selectedCell}
+                        highlightBinNum={highlightBinNum}
                         handleColourChange={this.handleColourChange}
-                        handleDisplayChange={this.handleDisplayChange} />}
+                        handleDisplayChange={this.handleDisplayChange}
+                        handleBinChange={this.handleBinChange} />}
                 </Panel>
                 <Map
                     showLatitude={showLatitude}
@@ -324,6 +342,7 @@ class App extends React.Component {
                     climateGeojson={climateGeojson}
                     cellDimensions={cellDimensions}
                     selectedCell={selectedCell}
+                    highlightBin={highlightBin}
                     handleMapClick={this.handleMapClick}
                     handleGeojsonClick={this.handleGeojsonClick} />
           </div>

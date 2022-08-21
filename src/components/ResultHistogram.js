@@ -1,20 +1,22 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 
-import { getColorFromFraction } from '../helpers';
+import { getColorFromFraction, highlightColour } from '../helpers';
 import './ResultHistogram.css';
 
 const ResultHistogram = (props) => {
 
-    const { histData, minCD, maxCD, selectedCell, colour } = props;
+    const { histData, minCD, maxCD, selectedCell, colour, highlightBinNum } = props;
 
     
     var colours = histData.colourFractions.map(fraction => getColorFromFraction(fraction, colour));
     colours.push(colours[colours.length-1]) // duplicate final colour incase there is an extra bin
 
+    if (highlightBinNum !== null) colours[highlightBinNum] = highlightColour(colour);
+
     return(
         <Plot
-        onClick={(e) => console.log(e)}
+        onClick={(e) => props.handleBinChange(e)}
         className='plotly-graph'
         data={[{
             name: 'Frequency',
@@ -35,6 +37,18 @@ const ResultHistogram = (props) => {
                 width: 1
             }
             },  
+        },
+        {
+            name: 'Selected cell back',
+            type: 'scatter',
+            mode: 'lines',
+            y: [0,histData.maxFreq],
+            x: [selectedCell.cd, selectedCell.cd],
+            hoverinfo: 'skip',
+            line: {
+                color:  'rgba(255,255,255,1)',
+                width: 2
+            }
         },
         {
             name: 'Selected cell',

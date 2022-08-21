@@ -59,6 +59,7 @@ const Map = (props) => {
                 resultParams={props.resultParams}
                 climateGeojson={props.climateGeojson}
                 cellDimensions={props.cellDimensions}
+                highlightBin={props.highlightBin}
                 handleGeojsonClick={props.handleGeojsonClick} />
             <RegionGeoJSON
                 region={props.region}/>

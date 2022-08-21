@@ -9,6 +9,8 @@ export const stateDefaults =
     mode: 'Basic',
     display: 'cd',
     colour: 'red',
+    highlightBinNum: null,
+    highlightBin: [null, null],
     selectedCell: {},
     showLatitude: false,
     panel: { left: 'Tool', right: ''},

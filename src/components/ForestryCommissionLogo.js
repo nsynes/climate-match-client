@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ForestryCommissionSvg from '../img/ForestryCommission.svg';
+import { ReactComponent as ForestryCommissionSvg } from '../img/ForestryCommission.svg';
 import './ForestryCommissionLogo.css';
 
 const ForestryCommissionLogo = (props) => {

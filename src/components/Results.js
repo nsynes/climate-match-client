@@ -1,11 +1,11 @@
 import React, { Suspense } from 'react';
 
-import { API_Domain } from '../api-domain';
 import Legend from './Legend';
 import SummaryText from './SummaryText';
 import PanelContent from './PanelContent';
 import PanelContentHeader from './PanelContentHeader';
 import PanelContentBody from './PanelContentBody';
+import ResultsDownloadLink from './ResultsDownloadLink';
 import ResultParameters from './ResultParameters';
 import Loading from './Loading';
 import { getHistogramData } from '../helpers';
@@ -15,20 +15,22 @@ const ResultHistogram = React.lazy(() => import('./ResultHistogram'));
 
 const Results = (props) => {
 
-    const { climateGeojson, downloadPath, resultParams, display, selectedCell, colour, highlightBinNum } = props;
+    const { climateGeojson, downloadPath, downloadBordersPath, resultParams, display, selectedCell, colour, highlightBinNum } = props;
 
     const histData = climateGeojson ? getHistogramData(climateGeojson, resultParams.minCD, resultParams.maxCD, resultParams.nSites, display, 20) : null;
 
 
     if ( resultParams && resultParams.searchClimate ) {
         return (
-            <PanelContent>
-                <div  onClick={(e) => props.handleBinChange(e, false)}>
-                    <PanelContentHeader>
-                        <h2>Results Summary</h2>
-                    </PanelContentHeader>
-                    <PanelContentBody>
-                        <a href={`${API_Domain}/${downloadPath}`}>Download results</a><br/><br/>
+            <PanelContent> 
+                <PanelContentHeader>
+                    <h2>Results Summary</h2>
+                </PanelContentHeader>
+                <PanelContentBody>
+                    <div onClick={(e) => props.handleBinChange(e, false)}>
+                        <ResultsDownloadLink
+                            downloadPath={downloadPath}
+                            downloadBordersPath={downloadBordersPath} />
                         <SummaryText
                             resultParams={resultParams} />
                         <br />
@@ -55,8 +57,8 @@ const Results = (props) => {
                         </div>
                         <ResultParameters
                             resultParams={resultParams} />
+                        </div>
                     </PanelContentBody>
-                </div>
             </PanelContent>
         );
     } else {

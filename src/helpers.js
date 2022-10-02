@@ -27,7 +27,7 @@ export const getColorFromFraction = (fraction, gradient) => {
             b = 0;
     }
     const hex = r * 0x10000 + g * 0x100 + b * 0x1;
-    //console.log(`${fraction}: ${r},${g},${b}`)
+    
     return '#' + ('000000' + hex.toString(16)).slice(-6);
 }
 
@@ -70,4 +70,10 @@ export const displayCommas = (s) => {
 
 export const highlightColour = (displayColour) => {
     return displayColour === "grey" ? "#006400" : "#000000";
+}
+
+export const calcBinStartEnd = (binNumber, binWidth, dataStart) => {
+    const binStart = dataStart + (binNumber * binWidth);
+    const binEnd = dataStart + ((binNumber+1) * binWidth);
+    return [binStart, binEnd];
 }

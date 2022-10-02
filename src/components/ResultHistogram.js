@@ -12,11 +12,13 @@ const ResultHistogram = (props) => {
     var colours = histData.colourFractions.map(fraction => getColorFromFraction(fraction, colour));
     colours.push(colours[colours.length-1]) // duplicate final colour incase there is an extra bin
 
-    if (highlightBinNum !== null) colours[highlightBinNum] = highlightColour(colour);
+    highlightBinNum.forEach(binNum => colours[binNum] = highlightColour(colour));
 
     return(
         <Plot
         onClick={(e) => props.handleBinChange(e)}
+        onSelected={(e) => console.log("onSelected", e)}
+        onSelecting={(e) => console.log("onSelecting", e)}
         className='plotly-graph'
         data={[{
             name: 'Frequency',
@@ -31,12 +33,22 @@ const ResultHistogram = (props) => {
                 size: histData.binWidth
             }, 
             marker: {
-            color: colours, 
-            line: {
-                color:  'rgba(100,100,100,1)', 
-                width: 1
+                color: colours, 
+                line: {
+                    color:  'rgba(100,100,100,1)', 
+                    width: 1
+                }
+            },
+            selected: {
+                marker: {
+                  color: '#000000'
+                }
+            },
+            unselected: {
+                marker: {
+                    opacity: 1
+                }
             }
-            },  
         },
         {
             name: 'Selected cell back',
@@ -85,6 +97,7 @@ const ResultHistogram = (props) => {
                 fixedrange: true
             },
             autosize: true,
+            dragmode: 'select',
             showlegend: false}}
         config={ {displayModeBar: false} } />
     )

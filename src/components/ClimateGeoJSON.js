@@ -23,15 +23,12 @@ const ClimateGeoJSON = (props) => {
         const fraction = props.display === 'rank' ? feature.properties.n / props.resultParams.nSites : feature.properties.cd / props.resultParams.maxCD;
         colour = getColorFromFraction(fraction, props.colour)
 
-        highlightBin.forEach(
-            bin => {
-                if (bin[0] !== null && feature.properties.cd >= accurateRound(bin[0], 4) && feature.properties.cd < accurateRound(bin[1], 4)) {
-                    colour = highlightColour(props.colour);
-                    opacity=1;
-                }
+        highlightBin.forEach((bin) => {
+            if (bin[0] !== null && feature.properties.cd >= accurateRound(bin[0], 4) && feature.properties.cd < accurateRound(bin[1], 4)) {
+                colour = highlightColour(props.colour);
+                opacity=1;
             }
-        )
-        
+        })
 
         const geojsonMarkerOptions = {
             fillColor: colour,

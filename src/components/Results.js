@@ -35,17 +35,20 @@ const Results = (props) => {
                             resultParams={resultParams} />
                         <br />
                         <div style={{fontStyle: 'italic'}}>Note: Climate Difference scores closest to zero indicate the best match.</div>
-                        <div className='summary-graph' onClick={e => e.stopPropagation()}>
-                        <Suspense fallback={<div className='loading-histo'><Loading size='small' /></div>}>
-                            <ResultHistogram
-                                histData={histData}
-                                minCD={resultParams.minCD}
-                                maxCD={resultParams.maxCD}
-                                selectedCell={selectedCell}
-                                colour={colour}
-                                highlightBinNum={highlightBinNum}
-                                handleBinChange={props.handleBinChange} />
-                        </Suspense>
+                        <div className='summary-graph'>
+                            <div className='summary-graph' onClick={e => e.stopPropagation()}>
+                                <Suspense fallback={<div className='loading-histo'><Loading size='small' /></div>}>
+                                    <ResultHistogram
+                                        histData={histData}
+                                        minCD={resultParams.minCD}
+                                        maxCD={resultParams.maxCD}
+                                        selectedCell={selectedCell}
+                                        colour={colour}
+                                        highlightBinNum={highlightBinNum}
+                                        handleBinChange={props.handleBinChange}
+                                        handleBinSelect={props.handleBinSelect} />
+                                </Suspense>
+                            </div>
                             <Legend
                                 display={display}
                                 colour={colour}
@@ -57,8 +60,8 @@ const Results = (props) => {
                         </div>
                         <ResultParameters
                             resultParams={resultParams} />
-                        </div>
-                    </PanelContentBody>
+                    </div>
+                </PanelContentBody>
             </PanelContent>
         );
     } else {

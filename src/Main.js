@@ -114,6 +114,24 @@ class Main extends React.Component {
         this.setState({ display: displayUpdate });
     }
 
+    handleBinSelect = (e) => {
+
+        if ( e && e.points && e.points.length > 0 ) {
+
+            const newBinNum = e.points.map(x => x.binNumber);
+
+            const dataStart = e.points[0].data.xbins.start;
+            const binWidth = e.points[0].data.xbins.size;
+            var highlightBin = []
+
+            newBinNum.forEach((bin) => {
+                const [binStart, binEnd] = calcBinStartEnd(bin, binWidth, dataStart);
+                highlightBin.push([binStart, binEnd])
+            })
+            this.setState({highlightBinNum: newBinNum, highlightBin: highlightBin})
+        }
+    }
+
     handleBinChange = (e, histoClicked=true) => {
 
         if (histoClicked) {
@@ -121,40 +139,36 @@ class Main extends React.Component {
             const dataStart = e.points[0].data.xbins.start;
             const binWidth = e.points[0].data.xbins.size;
 
-            var { highlightBinNum, highlightBin } = this.state;
-
+            var { highlightBin, highlightBinNum } = this.state;
+            var binStart = null, binEnd = null;
+            
             if ( e.event.shiftKey && highlightBinNum && highlightBinNum.length > 0 ) {
-                const lastBinNum = highlightBinNum[highlightBinNum.length-1];
+                const previousBinNum = highlightBinNum[0];
                 var start, end = 0;
-                if (clickedBinNum < lastBinNum) {
+                if (clickedBinNum < previousBinNum) {
                     start = clickedBinNum;
-                    end = lastBinNum;
+                    end = previousBinNum;
                 } else {
-                    start = lastBinNum + 1;
+                    start = previousBinNum + 1;
                     end = clickedBinNum;
                 }
                 for (var bin=start; bin<=end; bin++) {
-                    highlightBinNum.push(bin)
-                    const [binStart, binEnd] = calcBinStartEnd(bin, binWidth, dataStart);
-                    highlightBin.push([binStart, binEnd])
+                    if ( !highlightBinNum.includes(bin) ) {
+                        highlightBinNum.push(bin);
+                        [binStart, binEnd] = calcBinStartEnd(bin, binWidth, dataStart);
+                        highlightBin.push([binStart, binEnd]);
+                    }
                 }
             } else {
-                if ( highlightBinNum.includes(clickedBinNum) ) {
-                    const index = highlightBinNum.indexOf(clickedBinNum);
-                    if (index > -1) {
-                        highlightBinNum.splice(index, 1);
-                        highlightBin.splice(index, 1);
-                    }
-                } else {
-                    var [binStart, binEnd] = calcBinStartEnd(clickedBinNum, binWidth, dataStart);
-                    highlightBinNum.push(clickedBinNum)
-                    highlightBin.push([binStart, binEnd])
-                }
+                [binStart, binEnd] = calcBinStartEnd(clickedBinNum, binWidth, dataStart);
+                highlightBinNum = [clickedBinNum];
+                highlightBin = [[binStart, binEnd]];
             }
-            this.setState({ highlightBin: highlightBin, highlightBinNum: highlightBinNum });
         } else {
-            this.setState({ highlightBin: [], highlightBinNum: [] });
+            highlightBin = []
+            highlightBinNum = []
         }
+        this.setState({ highlightBin: highlightBin, highlightBinNum: highlightBinNum });
     }
 
     handleTabClick = (side, tabName) => {
@@ -366,7 +380,8 @@ class Main extends React.Component {
                         handleBordersCheckbox={this.handleBordersCheckbox}
                         handleColourChange={this.handleColourChange}
                         handleDisplayChange={this.handleDisplayChange}
-                        handleBinChange={this.handleBinChange} />}
+                        handleBinChange={this.handleBinChange}
+                        handleBinSelect={this.handleBinSelect}  />}
                 </Panel>
                 <Map
                     showLatitude={showLatitude}

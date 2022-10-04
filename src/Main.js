@@ -242,7 +242,7 @@ class Main extends React.Component {
         fetch(`${API_URL_Nominatim_Reverse}?lat=${selectedPoint.lat}&lon=${selectedPoint.lng}&format=json`)
         .then(handleResponse)
         .then((json) => {
-            console.log(json)//suburb, city or county, country
+            console.log(json) //suburb, city or county, country
         })
     }
 
@@ -256,6 +256,8 @@ class Main extends React.Component {
             loading: true,
             warningMessage: '',
             resultParams: {},
+            highlightBinNum: [],
+            highlightBin: [],
             selectedCell: {},
             panel: panel
         })

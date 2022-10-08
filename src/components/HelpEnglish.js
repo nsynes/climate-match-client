@@ -5,7 +5,9 @@ const HelpEnglish = (props) => {
     return (
         <div>
             <h3>Climate Matching Tool</h3>
-            The Climate Matching Tool ‘Basic’ version uses the monthly UKCP18 12 km resolution RCP8.5 future climate projections to 2080 and simulated monthly historic climates from 1981. The climatic search factors are monthly mean temperature, total monthly precipitation, and monthly mean diurnal temperature range.
+            <p>The Climate Matching Tool ‘Basic’ version uses the monthly UKCP18 12 km resolution RCP8.5 future climate projections to 2080 and simulated monthly historic climates from 1981. The climatic search factors are monthly mean temperature, total monthly precipitation, and monthly mean diurnal temperature range.</p>
+            <p>Areas matching the search climate are shown spatially and in a histogram. The bins of the histogram (CD scores) can be selected using the cursor and multiple selections can be made either by clicking and dragging or by holding <i>SHIFT</i> while clicking the bins of the histogram.</p>
+            <p>The resulting maps from an analysis can be downloaded as tiff files with a metadata file of the search criteria. Selection of country border files can be made to help visualise the results in a GIS environment.</p>
             <ol>
                 <li style={{fontWeight: 'bold'}}><h4>Select a location for your climate match by clicking on the map</h4></li>
                 <li style={{fontWeight: 'bold'}}><h4>Mode</h4></li>

@@ -18,15 +18,17 @@ const ClimateGeoJSON = (props) => {
     var setStyle = (feature, highlightBin) => {
 
         var colour = "";
-        var opacity = 0.8
-        
-        if (highlightBin[0] !== null && feature.properties.cd >= accurateRound(highlightBin[0], 4) && feature.properties.cd < accurateRound(highlightBin[1], 4)) {
-            colour = highlightColour(props.colour);
-            opacity=1;
-        } else {
-            const fraction = props.display === 'rank' ? feature.properties.n / props.resultParams.nSites : feature.properties.cd / props.resultParams.maxCD;
-            colour = getColorFromFraction(fraction, props.colour)
-        }
+        var opacity = 0.8;
+
+        const fraction = props.display === 'rank' ? feature.properties.n / props.resultParams.nSites : feature.properties.cd / props.resultParams.maxCD;
+        colour = getColorFromFraction(fraction, props.colour)
+
+        highlightBin.forEach((bin) => {
+            if (bin[0] !== null && feature.properties.cd >= accurateRound(bin[0], 4) && feature.properties.cd < accurateRound(bin[1], 4)) {
+                colour = highlightColour(props.colour);
+                opacity=1;
+            }
+        })
 
         const geojsonMarkerOptions = {
             fillColor: colour,
@@ -51,7 +53,7 @@ const ClimateGeoJSON = (props) => {
         return (
             <Pane name='all' >
                 <GeoJSON
-                    key={`${props.display}-${props.colour}-${props.highlightBin[0]}`}
+                    key={`${props.display}-${props.colour}-${props.highlightBin}`}
                     data={props.climateGeojson}
                     pointToLayer={(feature) => setStyle(feature, props.highlightBin)}
                     onEachFeature={onEachFeature}
